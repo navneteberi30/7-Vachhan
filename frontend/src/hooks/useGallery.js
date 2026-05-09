@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { fetchApprovedPhotos, fetchGuestPhotos, uploadPhoto } from '../services/gallery'
+import { deletePhoto, fetchApprovedPhotos, fetchGuestPhotos, uploadPhoto } from '../services/gallery'
 
 export function useGallery(eventTag = null) {
   const [photos, setPhotos] = useState([])
@@ -55,5 +55,10 @@ export function useMyUploads(guestId) {
     }
   }
 
-  return { photos, loading, upload, uploading, uploadError }
+  async function remove(photo) {
+    await deletePhoto(photo)
+    setPhotos(prev => prev.filter(item => item.id !== photo.id))
+  }
+
+  return { photos, loading, upload, remove, uploading, uploadError }
 }

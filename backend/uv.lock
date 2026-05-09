@@ -958,7 +958,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "gspread", specifier = ">=6.2" },
-    { name = "python-dotenv", specifier = ">=1.0" },
+    { name = "python-dotenv", specifier = ">=1.2.2" },
     { name = "supabase", specifier = ">=2.29" },
 ]
 

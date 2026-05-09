@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { useAuth } from '../contexts/AuthContext'
+import { ALLOWED_IMAGE_TYPES } from '../services/gallery'
 import { useGallery, useMyUploads } from '../hooks/useGallery'
 import { WEDDING } from '../config/wedding'
 
@@ -11,6 +12,8 @@ export default function Gallery() {
   const { guest } = useAuth()
   const [activeFilter, setActiveFilter] = useState(null) // null = all
   const [uploadingLocal, setUploadingLocal] = useState(false)
+  const [deletingPhotoId, setDeletingPhotoId] = useState(null)
+  const [notice, setNotice] = useState(null)
   const [lightbox, setLightbox] = useState(null) // photo url for full-screen view
   const fileRef = useRef(null)
 
@@ -18,7 +21,7 @@ export default function Gallery() {
   const eventTag = isMyPhotos ? null : activeFilter
 
   const { photos: communityPhotos, loading } = useGallery(eventTag)
-  const { photos: myPhotos, upload } = useMyUploads(guest?.id)
+  const { photos: myPhotos, upload, remove } = useMyUploads(guest?.id)
 
   // When "My Photos" is active, show the guest's own uploads (including pending)
   // Otherwise show all approved community photos
@@ -30,11 +33,28 @@ export default function Gallery() {
     try {
       setUploadingLocal(true)
       await upload(file, eventTag ?? 'general')
+      setActiveFilter('__mine__')
+      setNotice('Photo uploaded. It is waiting for review and only you can see it for now.')
     } catch (err) {
       alert(err.message || 'Upload failed. Please try again.')
     } finally {
       setUploadingLocal(false)
       e.target.value = ''
+    }
+  }
+
+  async function handleRemovePhoto(photo) {
+    if (photo.moderation_status !== 'pending') return
+    if (!window.confirm('Remove this uploaded photo?')) return
+
+    try {
+      setDeletingPhotoId(photo.id)
+      await remove(photo)
+      setNotice('Photo removed.')
+    } catch (err) {
+      alert(err.message || 'Could not remove this photo. Please try again.')
+    } finally {
+      setDeletingPhotoId(null)
     }
   }
 
@@ -63,6 +83,26 @@ export default function Gallery() {
           </button>
         ))}
       </div>
+
+      {notice && (
+        <div className="mx-4 mb-4 rounded-2xl border border-primary/10 bg-surface-container-low px-4 py-3 text-xs text-on-surface-variant shadow-sm flex items-start justify-between gap-3">
+          <span className="leading-relaxed">{notice}</span>
+          <button
+            onClick={() => setNotice(null)}
+            className="material-symbols-outlined text-base leading-none text-primary/70 hover:text-primary"
+            aria-label="Dismiss notice"
+          >
+            close
+          </button>
+        </div>
+      )}
+
+      {isMyPhotos && photos.some(photo => photo.moderation_status === 'pending') && (
+        <div className="mx-4 mb-4 rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-3 text-xs text-on-surface-variant shadow-sm flex items-start gap-2">
+          <span className="material-symbols-outlined text-tertiary text-base mt-0.5">schedule</span>
+          <span className="leading-relaxed">Pending photos are visible only to you until they are approved. You can remove one if it was added by mistake.</span>
+        </div>
+      )}
 
       {/* Grid */}
       <div className="px-4 pb-28 max-w-7xl mx-auto">
@@ -134,10 +174,26 @@ export default function Gallery() {
 
               {/* Pending badge — only visible on My Photos */}
               {isMyPhotos && photo.moderation_status === 'pending' && (
-                <div className="absolute top-3 left-3 px-2 py-1 rounded-full text-[10px] text-white font-bold flex items-center gap-1 shadow-sm bg-amber-500/90">
-                  <span className="material-symbols-outlined text-[10px]">schedule</span>
-                  Pending review
-                </div>
+                <>
+                  <div className="absolute top-3 left-3 px-2.5 py-1.5 rounded-full text-[10px] text-on-tertiary-container font-semibold flex items-center gap-1 shadow-sm bg-tertiary-container/95 backdrop-blur-sm">
+                    <span className="material-symbols-outlined text-[11px]">schedule</span>
+                    Pending review
+                  </div>
+                  <button
+                    onClick={e => {
+                      e.stopPropagation()
+                      handleRemovePhoto(photo)
+                    }}
+                    disabled={deletingPhotoId === photo.id}
+                    className="absolute top-3 right-3 px-2.5 py-1.5 rounded-full text-[10px] text-error font-semibold flex items-center gap-1 border border-error/15 bg-surface-container-low/90 backdrop-blur-sm shadow-sm hover:bg-error/10 disabled:opacity-60 transition-colors"
+                    aria-label="Remove uploaded photo"
+                  >
+                    <span className="material-symbols-outlined text-[12px]">
+                      {deletingPhotoId === photo.id ? 'progress_activity' : 'delete'}
+                    </span>
+                    {deletingPhotoId === photo.id ? 'Removing' : 'Remove'}
+                  </button>
+                </>
               )}
             </div>
           ))}
@@ -145,7 +201,13 @@ export default function Gallery() {
       </div>
 
       {/* Hidden file input */}
-      <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+      <input
+        ref={fileRef}
+        type="file"
+        accept={[...ALLOWED_IMAGE_TYPES].join(',')}
+        className="hidden"
+        onChange={handleFileChange}
+      />
 
       {/* Upload FAB */}
       <button

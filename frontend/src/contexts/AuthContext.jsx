@@ -10,34 +10,56 @@ export function AuthProvider({ children }) {
   const [loading, setLoading]   = useState(true)
 
   useEffect(() => {
-    // Restore session on mount (handles the redirect back from Google OAuth)
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (session?.user) {
-        setAuthUser(session.user)
-        const g = await getGuestByUserId(session.user.id)
-        setGuest(g)
-      }
-      setLoading(false)
-    })
+    let active = true
+    let guestRequestId = 0
 
-    // Keep in sync with Supabase Auth state changes:
-    // SIGNED_IN, SIGNED_OUT, TOKEN_REFRESHED, USER_UPDATED
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        if (session?.user) {
-          setAuthUser(session.user)
-          const g = await getGuestByUserId(session.user.id)
-          setGuest(g)
-        } else {
-          setAuthUser(null)
-          setGuest(null)
+    function applySession(session) {
+      const user = session?.user ?? null
+      const requestId = ++guestRequestId
+
+      setAuthUser(user)
+      setGuest(null)
+      setLoading(false)
+
+      if (!user) return
+
+      // Supabase can deadlock if another Supabase call is awaited directly
+      // inside onAuthStateChange, so defer the guest lookup out of the callback.
+      setTimeout(async () => {
+        try {
+          const g = await getGuestByUserId(user.id)
+          if (active && requestId === guestRequestId) setGuest(g)
+        } catch (err) {
+          console.warn('Guest lookup error:', err.message)
+          if (active && requestId === guestRequestId) setGuest(null)
         }
-        setLoading(false)
-      }
+      }, 0)
+    }
+
+    // Restore session on mount and keep in sync with Supabase Auth changes.
+    // INITIAL_SESSION handles browser refreshes and OAuth redirects.
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => applySession(session)
     )
 
-    return () => subscription.unsubscribe()
+    return () => {
+      active = false
+      subscription.unsubscribe()
+    }
   }, [])
+
+  useEffect(() => {
+    if (!loading) return undefined
+
+    // Safety net: if INITIAL_SESSION is delayed or missed, do not leave the
+    // protected routes in a permanent loading state.
+    const timer = setTimeout(() => {
+      console.warn('Auth initialization timed out.')
+      setLoading(false)
+    }, 3000)
+
+    return () => clearTimeout(timer)
+  }, [loading])
 
   /**
    * Link the signed-in Google account to an invite code.
