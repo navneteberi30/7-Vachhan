@@ -81,10 +81,19 @@ export async function uploadPhoto(file, guestId, eventTag) {
 
   const { data, error } = await supabase
     .from('gallery_photos')
-    .insert({ guest_id: guestId, event_tag: eventTag, storage_path: path, public_url: null })
+    .insert({
+      guest_id: guestId,
+      event_tag: eventTag,
+      storage_path: path,
+      public_url: null,
+      moderation_status: 'pending',
+    })
     .select()
     .single()
-  if (error) throw error
+  if (error) {
+    await supabase.storage.from(BUCKET).remove([path])
+    throw error
+  }
   return (await attachSignedUrls([data]))[0]
 }
 
