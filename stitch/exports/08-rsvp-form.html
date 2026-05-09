@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RSVP - Vows &amp; Vermillion</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#e6c047",
+                      "secondary": "#995200",
+                      "primary-container": "#ff757b",
+                      "secondary-container": "#ffc69a",
+                      "inverse-surface": "#0e0f0a",
+                      "on-secondary": "#ffffff",
+                      "error-dim": "#b92902",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#383833",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#532a00",
+                      "on-error-container": "#520c00",
+                      "outline-variant": "#bab9b2",
+                      "secondary-fixed-dim": "#ffb375",
+                      "background": "#fefcf4",
+                      "primary": "#ca0033",
+                      "primary-dim": "#b3002c",
+                      "tertiary-dim": "#6c5600",
+                      "surface-container-high": "#efeee5",
+                      "tertiary-container": "#f5ce53",
+                      "on-secondary-container": "#6f3a00",
+                      "on-tertiary-fixed": "#413200",
+                      "surface-container-highest": "#e9e9de",
+                      "on-primary-fixed": "#000000",
+                      "error-container": "#f95630",
+                      "secondary-dim": "#874800",
+                      "on-secondary-fixed-variant": "#7c4100",
+                      "tertiary-fixed": "#f5ce53",
+                      "outline": "#818181",
+                      "on-tertiary-fixed-variant": "#634e00",
+                      "surface-container-low": "#fbf9f1",
+                      "on-primary-fixed-variant": "#600013",
+                      "on-error": "#ffffff",
+                      "on-background": "#383833",
+                      "surface-bright": "#fefcf4",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#e9e9de",
+                      "on-primary-container": "#4e000e",
+                      "primary-fixed": "#ff757b",
+                      "surface-dim": "#e4e3d8",
+                      "secondary-fixed": "#ffc69a",
+                      "surface": "#fefcf4",
+                      "error": "#be2d06",
+                      "inverse-primary": "#ff5261",
+                      "surface-tint": "#ca0033",
+                      "surface-container": "#f5f4eb",
+                      "inverse-on-surface": "#9e9d96",
+                      "tertiary": "#7b6100",
+                      "on-tertiary-container": "#584500",
+                      "on-surface-variant": "#65655f",
+                      "primary-fixed-dim": "#ff5866"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Noto Serif"],
+                      "body": ["Manrope"],
+                      "label": ["Manrope"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .serif-italic { font-family: 'Noto Serif', serif; font-style: italic; }
+        .glass-nav {
+            background: rgba(254, 252, 244, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .gradient-btn {
+            background: linear-gradient(135deg, #ca0033 0%, #ff757b 100%);
+        }
+        .mandala-bg {
+            background-image: radial-gradient(circle at 100% 100%, rgba(123, 97, 0, 0.05) 0%, transparent 50%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header Navigation (TopAppBar) -->
+<header class="w-full top-0 sticky z-50 bg-[#fefcf4] dark:bg-stone-950 flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-rose-700 dark:text-rose-500" data-icon="menu">menu</span>
+</div>
+<h1 class="text-2xl font-serif italic text-rose-800 dark:text-rose-400">Vows &amp; Vermillion</h1>
+<div class="w-8"></div> <!-- Spacer for center alignment -->
+</header>
+<main class="max-w-2xl mx-auto px-6 pt-12 pb-32">
+<!-- Hero Section -->
+<section class="mb-12 text-center">
+<h2 class="font-headline text-5xl md:text-6xl text-primary mb-4 tracking-tight">Kindly Respond</h2>
+<p class="font-body text-on-surface-variant text-lg">We look forward to celebrating with you.</p>
+<div class="mt-8 flex justify-center">
+<div class="h-px w-24 bg-tertiary/20"></div>
+</div>
+</section>
+<!-- Form Container -->
+<div class="space-y-8">
+<!-- Event RSVP List -->
+<section class="space-y-6">
+<!-- Haldi Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 mandala-bg shadow-sm hover:shadow-md transition-shadow duration-300 relative overflow-hidden">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline text-2xl text-secondary mb-1">Haldi</h3>
+<p class="font-label text-sm text-outline uppercase tracking-widest">December 12th • 10:00 AM</p>
+</div>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-icon="spa" style="font-variation-settings: 'FILL' 1;">spa</span>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Toggle -->
+<div class="flex bg-surface-container-low p-1 rounded-full w-full">
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-semibold transition-all duration-300 bg-white text-primary shadow-sm">Attending</button>
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-all">Not Attending</button>
+</div>
+<!-- Guest Picker -->
+<div class="flex items-center justify-between">
+<span class="text-on-surface font-medium">Number of Guests</span>
+<div class="flex items-center gap-4 bg-surface-container-high rounded-full px-4 py-2">
+<button class="text-secondary"><span class="material-symbols-outlined" data-icon="remove">remove</span></button>
+<span class="font-bold text-lg w-4 text-center">2</span>
+<button class="text-secondary"><span class="material-symbols-outlined" data-icon="add">add</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Cocktail Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 mandala-bg shadow-sm hover:shadow-md transition-shadow duration-300">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline text-2xl text-secondary mb-1">Cocktail Night</h3>
+<p class="font-label text-sm text-outline uppercase tracking-widest">December 12th • 7:00 PM</p>
+</div>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-icon="celebration" style="font-variation-settings: 'FILL' 1;">celebration</span>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex bg-surface-container-low p-1 rounded-full w-full">
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-semibold transition-all duration-300 bg-white text-primary shadow-sm">Attending</button>
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-all">Not Attending</button>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface font-medium">Number of Guests</span>
+<div class="flex items-center gap-4 bg-surface-container-high rounded-full px-4 py-2">
+<button class="text-secondary"><span class="material-symbols-outlined" data-icon="remove">remove</span></button>
+<span class="font-bold text-lg w-4 text-center">2</span>
+<button class="text-secondary"><span class="material-symbols-outlined" data-icon="add">add</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Mehndi Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 mandala-bg shadow-sm hover:shadow-md transition-shadow duration-300">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline text-2xl text-secondary mb-1">Mehndi</h3>
+<p class="font-label text-sm text-outline uppercase tracking-widest">December 13th • 2:00 PM</p>
+</div>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-icon="local_florist" style="font-variation-settings: 'FILL' 1;">local_florist</span>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex bg-surface-container-low p-1 rounded-full w-full">
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-semibold transition-all duration-300 text-on-surface-variant hover:text-on-surface">Attending</button>
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-semibold transition-all duration-300 bg-white text-primary shadow-sm">Not Attending</button>
+</div>
+</div>
+</div>
+<!-- Wedding Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 mandala-bg shadow-sm hover:shadow-md transition-shadow duration-300">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline text-2xl text-secondary mb-1">Wedding Day</h3>
+<p class="font-label text-sm text-outline uppercase tracking-widest">December 14th • 6:00 PM</p>
+</div>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex bg-surface-container-low p-1 rounded-full w-full">
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-semibold transition-all duration-300 bg-white text-primary shadow-sm">Attending</button>
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-all">Not Attending</button>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface font-medium">Number of Guests</span>
+<div class="flex items-center gap-4 bg-surface-container-high rounded-full px-4 py-2">
+<button class="text-secondary"><span class="material-symbols-outlined" data-icon="remove">remove</span></button>
+<span class="font-bold text-lg w-4 text-center">1</span>
+<button class="text-secondary"><span class="material-symbols-outlined" data-icon="add">add</span></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Additional Notes -->
+<section class="mt-12">
+<label class="block font-headline text-xl text-secondary mb-4">Additional Notes</label>
+<div class="relative">
+<textarea class="w-full bg-surface-container-high border-0 border-b-2 border-tertiary-fixed-dim focus:ring-0 focus:border-primary placeholder-outline-variant rounded-t-lg font-body p-4 transition-all" placeholder="Dietary restrictions or special requests..." rows="4"></textarea>
+</div>
+</section>
+<!-- Action Button -->
+<section class="mt-12 text-center">
+<button class="gradient-btn w-full md:w-auto md:min-w-[300px] text-white font-bold py-4 px-12 rounded-full shadow-xl shadow-rose-900/10 hover:scale-[0.98] transition-transform duration-150">
+                    Send Response
+                </button>
+<p class="mt-4 text-xs font-label text-outline uppercase tracking-widest">Responses needed by November 15th</p>
+</section>
+</div>
+</main>
+<!-- Bottom Navigation (BottomNavBar) -->
+<nav class="fixed bottom-6 left-0 right-0 z-50 flex justify-around items-center px-4">
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] rounded-full bg-[#fefcf4]/80 dark:bg-stone-950/80 backdrop-blur-xl shadow-xl shadow-rose-900/5 flex justify-around items-center py-2">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-3 hover:text-rose-600 dark:hover:text-rose-300" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-sans text-[11px] uppercase tracking-widest font-semibold mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-3 hover:text-rose-600 dark:hover:text-rose-300" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-sans text-[11px] uppercase tracking-widest font-semibold mt-1">Events</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-gradient-to-tr from-rose-700 to-rose-400 text-white rounded-full p-3 scale-110 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="how_to_reg" style="font-variation-settings: 'FILL' 1;">how_to_reg</span>
+<span class="font-sans text-[11px] uppercase tracking-widest font-semibold mt-1">RSVP</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-3 hover:text-rose-600 dark:hover:text-rose-300" href="#">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-sans text-[11px] uppercase tracking-widest font-semibold mt-1">Gallery</span>
+</a>
+</div>
+</nav>
+<!-- Background Decoration -->
+<div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+<div class="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] opacity-[0.03] text-tertiary">
+<svg fill="currentColor" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-dasharray="1 2" stroke-width="0.5"></circle>
+<circle cx="50" cy="50" fill="none" r="30" stroke="currentColor" stroke-dasharray="1 2" stroke-width="0.5"></circle>
+<circle cx="50" cy="50" fill="none" r="20" stroke="currentColor" stroke-dasharray="1 2" stroke-width="0.5"></circle>
+</svg>
+</div>
+<div class="absolute bottom-[-5%] left-[-5%] w-[30%] h-[30%] opacity-[0.03] text-primary">
+<svg fill="currentColor" viewbox="0 0 100 100">
+<path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"></path>
+</svg>
+</div>
+</div>
+</body></html>

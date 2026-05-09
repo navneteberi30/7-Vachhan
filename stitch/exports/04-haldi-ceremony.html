@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#be2d06",
+                    "surface-bright": "#fefcf4",
+                    "on-secondary-fixed-variant": "#7c4100",
+                    "primary-container": "#ff757b",
+                    "on-tertiary-fixed-variant": "#634e00",
+                    "surface-dim": "#e4e3d8",
+                    "tertiary-fixed": "#f5ce53",
+                    "tertiary": "#7b6100",
+                    "error-dim": "#b92902",
+                    "on-primary-fixed": "#000000",
+                    "on-primary": "#ffffff",
+                    "on-background": "#383833",
+                    "on-secondary-fixed": "#532a00",
+                    "surface-container": "#f5f4eb",
+                    "background": "#fefcf4",
+                    "secondary": "#995200",
+                    "tertiary-fixed-dim": "#e6c047",
+                    "primary": "#ca0033",
+                    "outline": "#81817a",
+                    "inverse-primary": "#ff5261",
+                    "on-tertiary-fixed": "#413200",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#600013",
+                    "tertiary-container": "#f5ce53",
+                    "tertiary-dim": "#6c5600",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#ca0033",
+                    "surface-container-high": "#efeee5",
+                    "primary-fixed": "#ff757b",
+                    "on-secondary-container": "#6f3a00",
+                    "surface-container-highest": "#e9e9de",
+                    "secondary-fixed-dim": "#ffb375",
+                    "surface": "#fefcf4",
+                    "surface-container-low": "#fbf9f1",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#ffc69a",
+                    "primary-dim": "#b3002c",
+                    "primary-fixed-dim": "#ff5866",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-container": "#584500",
+                    "on-primary-container": "#4e000e",
+                    "error-container": "#f95630",
+                    "inverse-surface": "#0e0f0a",
+                    "inverse-on-surface": "#9e9d96",
+                    "secondary-container": "#ffc69a",
+                    "secondary-dim": "#874800",
+                    "on-surface": "#383833",
+                    "on-surface-variant": "#65655f",
+                    "on-error-container": "#520c00",
+                    "outline-variant": "#bab9b2",
+                    "surface-variant": "#e9e9de"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(254, 252, 244, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-shadow-sm {
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 w-full z-50 bg-[#fefcf4]/80 dark:bg-[#1c1b17]/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.05)] h-16 flex items-center justify-center">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-7xl mx-auto">
+<button class="text-[#ca0033] hover:opacity-80 transition-opacity active:scale-95 duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="text-2xl font-serif italic tracking-wide text-[#ca0033]">A &amp; S Wedding</h1>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img alt="Profile Avatar" class="w-full h-full object-cover" data-alt="Close-up professional headshot of a guest with a warm smile and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdzA7R36Xf_Y2nhsBhqAnKQ0iurjTpSAjOCqDAxkrMwB2k1uEkPKA4qMUg6TYmkwewGAPkTYjRt28_sK7A7-GeTmKIYw66EfxVGVwib-rFBTn0HHh7xr86-lEEyppnxYpJa2l9ErgJ-mWPXI9uEEPBCASnsntRkmwHYQfCTLr2RDDCZAFzoXlqcoTWjmmoWnzH126NQuKoDies4xjswmQG_m4r8lvbGzJvHvsKfjOv-QVcQa3QrEXEgaAUrpvbU2CMrbk8rQdEZ_s"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="min-h-screen pt-16 pb-24">
+<!-- Hero Video/Visual Section -->
+<div class="relative w-full h-[530px] md:h-[618px] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
+<img alt="Haldi festive atmosphere" class="w-full h-full object-cover" data-alt="Cinematic slow-motion shot of vibrant yellow marigold flower petals falling softly through golden sunlight at a festive Indian wedding" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDF1pKDNlVflxWuby_iNVihUZzY0BxZ5T78NpJS4i74xzpXh4pD_9u0J6-_VRx0x2fi8Q27HTiAA7-1R_oG5GMqQCqJSIFVJ_0Td4z0ir8LlLBERaXgQ6DRTVln_ezzOq2ip10LRrPF6NUhsGN8X6T0XtA-4xhcVzjCLpiZlZYMLwE85YTNIY_4QP93ES2aBb8WvUboPMv8tYfL0bZU3fhv52CmP527Pj5aadSh2zl5D7jJt6s5_gixeVMyeBdJLVIPfwp1EPwN4GU"/>
+<!-- Floating Detail Card Over Hero -->
+<div class="absolute bottom-0 left-0 right-0 z-20 px-6 pb-12 flex justify-center">
+<div class="w-full max-w-4xl text-center">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-tertiary/10 text-tertiary mb-4">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">colors_spark</span>
+<span class="font-label text-xs uppercase tracking-[0.2em] font-bold">Upcoming Tradition</span>
+</div>
+<h2 class="font-headline text-5xl md:text-7xl text-primary font-bold mb-4">Haldi Ceremony</h2>
+<p class="font-body text-lg text-on-surface-variant max-w-2xl mx-auto italic">A celebration of sunshine, turmeric, and love as we bless the bride and groom for their journey ahead.</p>
+</div>
+</div>
+</div>
+<!-- Event Details Bento Section -->
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 -mt-8">
+<!-- Primary Info Panel -->
+<div class="md:col-span-8 space-y-8">
+<!-- Logistics Card -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/15 overflow-hidden relative group">
+<div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-9xl">temple_hindu</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 relative z-10">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<div>
+<h4 class="font-label text-xs text-secondary font-bold uppercase tracking-widest mb-1">Date &amp; Time</h4>
+<p class="font-headline text-xl text-on-surface">Thursday, Oct 24th</p>
+<p class="text-on-surface-variant text-sm">10:30 AM — 01:30 PM</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div>
+<h4 class="font-label text-xs text-tertiary font-bold uppercase tracking-widest mb-1">Venue</h4>
+<p class="font-headline text-xl text-on-surface">Sunlit Courtyard</p>
+<p class="text-on-surface-variant text-sm">The Oberoi Grand, Kolkata</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Description & Details -->
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="h-[1px] flex-grow bg-outline-variant/20"></div>
+<h3 class="font-headline text-2xl italic text-on-surface px-4">The Ceremony</h3>
+<div class="h-[1px] flex-grow bg-outline-variant/20"></div>
+</div>
+<p class="font-body text-on-surface-variant leading-relaxed text-lg">
+                        The Haldi ceremony is a lively pre-wedding ritual where a paste of turmeric, sandalwood, and rose water is applied to the bride and groom. Traditionally, it's meant to ward off evil spirits and provide a natural glow for the wedding day. 
+                        <br/><br/>
+                        We invite you to wear your brightest shades of yellow or orange and join us for a morning of folk songs, laughter, and perhaps a little bit of playful turmeric-smearing!
+                    </p>
+<div class="grid grid-cols-2 gap-4 mt-8">
+<div class="bg-surface-container-low p-6 rounded-lg text-center">
+<span class="material-symbols-outlined text-secondary mb-2">checkroom</span>
+<p class="font-label text-xs font-bold uppercase tracking-widest text-secondary mb-1">Dress Code</p>
+<p class="text-on-surface font-medium">Yellow Festive / Ethnic</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-lg text-center">
+<span class="material-symbols-outlined text-tertiary mb-2">restaurant</span>
+<p class="font-label text-xs font-bold uppercase tracking-widest text-tertiary mb-1">Lunch Flow</p>
+<p class="text-on-surface font-medium">Satvik Buffet at 1:00 PM</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action & Map Sidebar -->
+<div class="md:col-span-4 space-y-6">
+<!-- RSVP Status / Quick Action -->
+<div class="bg-surface-container-highest p-8 rounded-xl relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="font-headline text-xl mb-4">Your Invitation</h4>
+<p class="text-sm text-on-surface-variant mb-6">Let us know if you'll be attending the morning festivities.</p>
+<div class="flex flex-col gap-3">
+<button class="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold shadow-md hover:opacity-90 transition-opacity">
+                                Confirm Attendance
+                            </button>
+<button class="w-full py-3 px-6 rounded-lg border border-tertiary/20 text-secondary font-bold hover:bg-surface-container-low transition-colors">
+                                View Full Itinerary
+                            </button>
+</div>
+</div>
+</div>
+<!-- Location Preview Card -->
+<div class="bg-surface-container-lowest p-2 rounded-xl border border-outline-variant/15 shadow-sm overflow-hidden">
+<div class="h-48 rounded-lg overflow-hidden mb-4">
+<img alt="Venue Map Preview" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700" data-alt="An artistic high-angle architectural photograph of a luxury heritage hotel courtyard with checkered marble floors and lush tropical palms" data-location="Kolkata" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYRqmmsKE8Hg_RnIjBpyLCBKdFBOdvuRsTZhXXUGp4hocr4TbHnFesoagkaKtuJsl0WZUyJ6Gat_qHMA8UwyfoWnLtcqFUxKWMnotC-4axpZd1fQyE9d3vp-jbIssz606Lvx8BplhnbenTBEq1n42_mQPvB4xDL1zlPZYNVedX_16m61QLAr2t0ub-E4TrI1zcDDA7DvzwOqUfdEj_Ui5_4VrCc656ApVWSEeDWxlxyGaLFxDm9DxcALKfeTK1t3GOQu4jf2CaOA4"/>
+</div>
+<div class="p-4 pt-0">
+<div class="flex items-center justify-between">
+<span class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Navigate to Venue</span>
+<button class="text-primary hover:bg-primary/5 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">directions</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Shared Component Mandala Placeholder -->
+<div class="flex justify-center py-4 opacity-10">
+<span class="material-symbols-outlined text-6xl text-tertiary">filter_vintage</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md rounded-full border border-[#bab9b2]/15 bg-[#fefcf4]/80 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(56,56,51,0.1)] z-50">
+<div class="flex justify-around items-center h-16 px-4">
+<a class="flex flex-col items-center justify-center text-[#383833]/50 dark:text-[#fefcf4]/50 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home_wedding">home</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#ca0033] dark:text-[#ffb3b8] font-bold scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-medium">Events</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#383833]/50 dark:text-[#fefcf4]/50 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-medium">Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#383833]/50 dark:text-[#fefcf4]/50 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-medium">RSVP</span>
+</a>
+</div>
+</nav>
+</body></html>

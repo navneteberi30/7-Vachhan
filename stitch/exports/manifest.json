@@ -1,0 +1,100 @@
+{
+  "project": {
+    "id": "7403690405792859166",
+    "title": "Indian Wedding App Invite",
+    "stitch_url": "https://stitch.withgoogle.com/projects/7403690405792859166",
+    "device_type": "MOBILE",
+    "design_theme": {
+      "primary_color": "#DC143C",
+      "secondary_color": "#FF8C00",
+      "tertiary_color": "#D4AF37",
+      "headline_font": "NOTO_SERIF",
+      "body_font": "MANROPE",
+      "color_mode": "LIGHT",
+      "roundness": "ROUND_FOUR"
+    }
+  },
+  "imported_at": "2026-04-14",
+  "screens": [
+    {
+      "file": "01-welcome-home.html",
+      "title": "Welcome Home",
+      "screen_id": "eb45531c982b416eb84ffe4946b62867",
+      "width": "780",
+      "height": "6232",
+      "description": "Landing page with couple names, countdown timer, couple message, upcoming event teaser, gallery preview, and stay info links."
+    },
+    {
+      "file": "02-mehndi-day.html",
+      "title": "Mehndi Day Details",
+      "screen_id": "166c3e0d9751420cb5a0c4e025a63cc4",
+      "width": "780",
+      "height": "5444",
+      "description": "Mehndi event detail page with date, venue, dress code, what-to-expect sections, and RSVP call-to-action."
+    },
+    {
+      "file": "03-cocktail-party.html",
+      "title": "Cocktail Party Details",
+      "screen_id": "80d7b7ae947e4fcab070f8544a1d689d",
+      "width": "780",
+      "height": "5272",
+      "description": "Cocktail evening event details with venue, dress code, and RSVP prompt."
+    },
+    {
+      "file": "04-haldi-ceremony.html",
+      "title": "Haldi Detail",
+      "screen_id": "5404e2c5203643ce8ed4572c00cd8b31",
+      "width": "780",
+      "height": "4490",
+      "description": "Haldi ceremony page with ritual description, timing, dress code, and attendance confirmation."
+    },
+    {
+      "file": "05-celebrations-itinerary.html",
+      "title": "The Celebrations",
+      "screen_id": "90632490e27648a2b4d0628e66f58ee2",
+      "width": "780",
+      "height": "5598",
+      "description": "Full 4-day celebration itinerary listing Haldi, Cocktail Party, Mehndi, and Wedding Day with event detail links."
+    },
+    {
+      "file": "06-guest-login.html",
+      "title": "Guest Login",
+      "screen_id": "af314118d8a4463ba0110ddde70e2890",
+      "width": "780",
+      "height": "1768",
+      "description": "Guest login screen with name, invite code, and mobile number fields."
+    },
+    {
+      "file": "07-guest-gallery.html",
+      "title": "Guest Gallery & Uploads",
+      "screen_id": "9c2a6a4a8acd4b49a6d5009b6993a661",
+      "width": "780",
+      "height": "2052",
+      "description": "Community photo gallery with event filter tabs, upload button, and moderation status badges."
+    },
+    {
+      "file": "08-rsvp-form.html",
+      "title": "RSVP Form",
+      "screen_id": "c6aef96a4a74434bb0ab95b380b9acec",
+      "width": "780",
+      "height": "3526",
+      "description": "RSVP form covering all 4 events with attending/not-attending toggles, guest count selectors, notes field, and deadline."
+    },
+    {
+      "file": "09-wedding-day.html",
+      "title": "Wedding Day Details",
+      "screen_id": "09748ed55be848ccac24a8ee2c631722",
+      "width": "780",
+      "height": "6522",
+      "description": "Main wedding day detail screen with venue, full ceremony itinerary (Baraat, Varmala, Pheras, Dinner), and RSVP CTA."
+    },
+    {
+      "file": "10-stay-info.html",
+      "title": "Stay Info",
+      "screen_id": "2d4f5ec685b3450eb4ba154a6de2b146",
+      "width": "780",
+      "height": "3332",
+      "description": "Hotel stay information with room assignment, check-in/out times, and upcoming venue events."
+    }
+  ]
+}

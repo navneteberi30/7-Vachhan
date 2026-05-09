@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vows &amp; Vermillion | Login</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ff757b",
+                        "surface-bright": "#fefcf4",
+                        "secondary": "#995200",
+                        "secondary-dim": "#874800",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#ca0033",
+                        "on-primary-container": "#4e000e",
+                        "surface": "#fefcf4",
+                        "tertiary-container": "#f5ce53",
+                        "primary-dim": "#b3002c",
+                        "background": "#fefcf4",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#532a00",
+                        "inverse-primary": "#ff5261",
+                        "tertiary-fixed-dim": "#e6c047",
+                        "on-background": "#383833",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb375",
+                        "secondary-container": "#ffc69a",
+                        "on-error-container": "#520c00",
+                        "outline-variant": "#bab9b2",
+                        "on-primary-fixed": "#000000",
+                        "surface-dim": "#e4e3d8",
+                        "error": "#be2d06",
+                        "surface-container": "#f5f4eb",
+                        "inverse-surface": "#0e0f0a",
+                        "tertiary-dim": "#6c5600",
+                        "tertiary-fixed": "#f5ce53",
+                        "secondary-fixed": "#ffc69a",
+                        "surface-variant": "#e9e9de",
+                        "on-tertiary-container": "#584500",
+                        "primary-container": "#ff757b",
+                        "on-surface-variant": "#65655f",
+                        "on-primary-fixed-variant": "#600013",
+                        "surface-container-high": "#efeee5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#413200",
+                        "tertiary": "#7b6100",
+                        "surface-container-low": "#fbf9f1",
+                        "on-tertiary-fixed-variant": "#634e00",
+                        "on-secondary-fixed-variant": "#7c4100",
+                        "on-secondary-container": "#6f3a00",
+                        "primary": "#ca0033",
+                        "on-surface": "#383833",
+                        "outline": "#81817a",
+                        "error-container": "#f95630",
+                        "primary-fixed-dim": "#ff5866",
+                        "inverse-on-surface": "#9e9d96",
+                        "surface-container-highest": "#e9e9de",
+                        "error-dim": "#b92902"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #fefcf4;
+        }
+        .serif-headline {
+            font-family: 'Noto Serif', serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(254, 252, 244, 0.7);
+            backdrop-filter: blur(12px);
+        }
+        .mandala-overlay {
+            opacity: 0.04;
+            pointer-events: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Decorative Subtle Background Image -->
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-10 filter sepia-[.2]" data-alt="Soft focused artistic black and white photo of a couple walking in a garden, very high key and low contrast, ethereal wedding atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9V1gwBJo6-kU0RLwC6I9GL10UngWF9PnJ2F9Qon2ZWg17mMx4lGy4qqZn0q-t1Ckfl1_1dnf4tjMBwqIze0UPIqrwLRNHdZ9jBws0iBm6zq2CjG0tMkiCdiL9Vk3J8bgD-RNRTZ-a9-cIgiZ1W_6omwDTpH-lTAF2Lr1qrTVDoFWKz4XuZYGd79Qp0qboodH5tIS90hEsx3twGI5iTd560pMxA6Cuz2Ig2ZCGmYumX5kpZ7ykm9J84pJuULrXU9JsGLKD2GCv58s"/>
+</div>
+<!-- Tonal mandala accents -->
+<div class="absolute top-[-10%] left-[-10%] w-96 h-96 mandala-overlay">
+<img class="w-full h-full object-contain" data-alt="Traditional Indian mandala pattern silhouette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKxx7B0Fft-Qu3iFBE1UyqHc-pFuw7LOcnXJN8CjCSldgsSix27646DSwVV6SJv8bhli_NL9bD9bYipuTKLxAghxUUI5s51zSuV-bBk_lS9ETeaE3pGDUV9dIshS4F2L4zUewLca-yZ1_ga6US_MJG5vMk72uC1uBOxbgzOwfBnf6lpIqWX-2Z-oXbibL33LeRpxkoG68RbK_SygYPQ-dNC7kob_iofypROtqVNOKQ9HSMrdXSA437rDBUQRo7PngJ1oOCzQvTH2c"/>
+</div>
+<div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 mandala-overlay rotate-180">
+<img class="w-full h-full object-contain" data-alt="Traditional Indian mandala pattern silhouette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCliyWEJvG07bgd7yo0dTj7ggJFXmu4adk9XTus1foyUFnj-o9u7v4oY3XgZY2JvtOHEdKUBN10Y2pM3Y0atb5Ms0RuUkFLoiRhnJIHgX0kaXMnH4mJt549liDi0StFPks5lMFLoxZQxwZtdKQOIYOg2CQ0MLFd_knL9tK4zzMLmcJmcJb99TFHreNKkWUqBkQgr820u9irGD64r0lkMFcMWZMxTk7T3d1W6mOflPuk2gKhQBBDAH0f5DCLN-AiEnHKPihaCUPC2J8"/>
+</div>
+<!-- Login Container -->
+<main class="relative z-10 w-full max-w-md px-6">
+<div class="flex flex-col items-center mb-12 text-center">
+<span class="serif-headline italic text-primary text-3xl md:text-4xl mb-2 tracking-tight">Vows &amp; Vermillion</span>
+<p class="font-label text-secondary uppercase tracking-[0.2em] text-[10px] font-semibold">The Digital Heirloom Experience</p>
+</div>
+<div class="glass-panel p-8 md:p-10 rounded-xl shadow-[0_32px_64px_-12px_rgba(56,56,51,0.08)] border border-white/40">
+<div class="mb-8">
+<h1 class="serif-headline text-2xl text-on-surface mb-2">Welcome Guest</h1>
+<p class="text-on-surface-variant font-body text-sm">Please enter your details to join the celebration.</p>
+</div>
+<form class="space-y-6">
+<!-- Full Name Field -->
+<div class="relative">
+<label class="font-label text-[11px] uppercase tracking-widest text-secondary font-bold absolute -top-2 left-0 z-10" for="full_name">Full Name</label>
+<input class="w-full bg-surface-container-high border-0 border-b-2 border-transparent focus:border-tertiary focus:ring-0 rounded-none pt-4 pb-2 px-0 text-on-surface placeholder:text-outline-variant/50 transition-all duration-300" id="full_name" name="full_name" placeholder="e.g. Aditi Sharma" type="text"/>
+</div>
+<!-- Toggle/Selection for Invite Code or Mobile -->
+<div class="pt-2">
+<div class="flex items-center space-x-6 mb-4">
+<button class="text-primary border-b-2 border-primary pb-1 text-xs font-semibold uppercase tracking-wider" type="button">Invite Code</button>
+<button class="text-on-surface-variant pb-1 text-xs font-semibold uppercase tracking-wider hover:text-primary transition-colors" type="button">Mobile Number</button>
+</div>
+<div class="relative">
+<label class="font-label text-[11px] uppercase tracking-widest text-secondary font-bold absolute -top-2 left-0 z-10" for="invite_code">Invite Code</label>
+<input class="w-full bg-surface-container-high border-0 border-b-2 border-transparent focus:border-tertiary focus:ring-0 rounded-none pt-4 pb-2 px-0 text-on-surface placeholder:text-outline-variant/50 transition-all duration-300" id="invite_code" name="invite_code" placeholder="XXXX-XXXX" type="text"/>
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-6">
+<button class="w-full h-14 bg-gradient-to-r from-primary to-primary-container text-on-primary font-body font-semibold rounded-lg shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center space-x-2" type="submit">
+<span>Enter Celebration</span>
+<span class="material-symbols-outlined text-xl" data-icon="arrow_right_alt">arrow_right_alt</span>
+</button>
+</div>
+</form>
+<!-- Secondary Help Action -->
+<div class="mt-8 text-center">
+<button class="text-primary/70 hover:text-primary font-body text-xs underline decoration-primary/30 transition-colors">
+                    Having trouble accessing your invite?
+                </button>
+</div>
+</div>
+<!-- Footer / Branding -->
+<footer class="mt-12 text-center">
+<p class="text-on-surface-variant font-label text-[10px] uppercase tracking-[0.3em] opacity-60">
+                Crafted with love &amp; tradition
+            </p>
+</footer>
+</main>
+<!-- Suppressed Nav Shell for focused transactional screen as per Mandate -->
+</body></html>

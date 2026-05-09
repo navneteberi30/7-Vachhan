@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guest Gallery - Vows &amp; Vermillion</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#be2d06",
+                        "surface-bright": "#fefcf4",
+                        "on-secondary-fixed-variant": "#7c4100",
+                        "primary-container": "#ff757b",
+                        "on-tertiary-fixed-variant": "#634e00",
+                        "surface-dim": "#e4e3d8",
+                        "tertiary-fixed": "#f5ce53",
+                        "tertiary": "#7b6100",
+                        "error-dim": "#b92902",
+                        "on-primary-fixed": "#000000",
+                        "on-primary": "#ffffff",
+                        "on-background": "#383833",
+                        "on-secondary-fixed": "#532a00",
+                        "surface-container": "#f5f4eb",
+                        "background": "#fefcf4",
+                        "secondary": "#995200",
+                        "tertiary-fixed-dim": "#e6c047",
+                        "primary": "#ca0033",
+                        "outline": "#81817a",
+                        "inverse-primary": "#ff5261",
+                        "on-tertiary-fixed": "#413200",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#600013",
+                        "tertiary-container": "#f5ce53",
+                        "tertiary-dim": "#6c5600",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#ca0033",
+                        "surface-container-high": "#efeee5",
+                        "primary-fixed": "#ff757b",
+                        "on-secondary-container": "#6f3a00",
+                        "surface-container-highest": "#e9e9de",
+                        "secondary-fixed-dim": "#ffb375",
+                        "surface": "#fefcf4",
+                        "surface-container-low": "#fbf9f1",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffc69a",
+                        "primary-dim": "#b3002c",
+                        "primary-fixed-dim": "#ff5866",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#584500",
+                        "on-primary-container": "#4e000e",
+                        "error-container": "#f95630",
+                        "inverse-surface": "#0e0f0a",
+                        "inverse-on-surface": "#9e9d96",
+                        "secondary-container": "#ffc69a",
+                        "secondary-dim": "#874800",
+                        "on-surface": "#383833",
+                        "on-surface-variant": "#65655f",
+                        "on-error-container": "#520c00",
+                        "outline-variant": "#bab9b2",
+                        "surface-variant": "#e9e9de"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "serif": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .masonry-grid {
+            column-count: 2;
+            column-gap: 0.75rem;
+        }
+        .masonry-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 0.75rem;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopAppBar (from COMPONENTS_14) -->
+<header class="bg-[#fefcf4] dark:bg-stone-950 w-full top-0 sticky z-50">
+<div class="flex items-center justify-between px-6 py-4 w-full border-b border-[#bab9b2]/15">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-rose-700 dark:text-rose-500 cursor-pointer hover:opacity-80 transition-opacity">menu</span>
+<h1 class="text-2xl font-serif italic text-rose-800 dark:text-rose-400">Vows &amp; Vermillion</h1>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXTvju_fZuYd4t33PmNIolGPbxi2Fme3tX9z2RR7Ro847ixW03058wpAoD14byMSC51rQaw54YmEPhScHEyQztdJkRMcHMpjBUkwrxscmYXij__DFN__ctJMcCLpi2E9dUIyit0PSWISwaW0ckWOPTCX2rcXUvCoYEod6ip4N1XIo9hd3af0qfm65VCBtjpSfA_v0QqVQx_CMarcm9yVszGxZw1U1czyH2qE3LPlDM21g0hJJR0n0UdKHJ_aRj9TgTq44A4SnmXk4"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-6 pb-32 px-4 max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-6 text-center">
+<h2 class="text-4xl font-headline text-on-surface mb-1">Guest Gallery</h2>
+<p class="text-on-surface-variant font-label text-[10px] tracking-[0.2em] uppercase">Capturing Moments Together</p>
+</div>
+<!-- Toggle between My Uploads and Community -->
+<div class="flex justify-center mb-8">
+<div class="inline-flex p-1 bg-surface-container-highest rounded-full shadow-inner">
+<button class="px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 bg-white text-primary shadow-sm" id="community-tab">Community</button>
+<button class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 text-on-surface-variant hover:text-on-surface" id="uploads-tab">My Uploads</button>
+</div>
+</div>
+<!-- Category Filter (Sticky beneath toggle) -->
+<div class="flex overflow-x-auto pb-6 mb-2 gap-2 no-scrollbar">
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary font-label text-xs font-semibold whitespace-nowrap shadow-sm">All Photos</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label text-xs font-medium whitespace-nowrap">Haldi</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label text-xs font-medium whitespace-nowrap">Cocktail</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label text-xs font-medium whitespace-nowrap">Ceremony</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label text-xs font-medium whitespace-nowrap">Reception</button>
+</div>
+<!-- Community Gallery View (Default) -->
+<div class="masonry-grid" id="community-view">
+<!-- Upload Card -->
+<div class="masonry-item rounded-2xl border-2 border-dashed border-outline-variant bg-surface-container-low flex flex-col items-center justify-center p-6 text-center h-48 cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-primary text-2xl">add_a_photo</span>
+</div>
+<p class="text-xs font-bold text-primary uppercase tracking-wider">Upload Moment</p>
+<p class="text-[10px] text-on-surface-variant mt-1">Share your joy</p>
+</div>
+<!-- Community Items -->
+<div class="masonry-item group relative rounded-xl overflow-hidden bg-surface-container-low">
+<img class="w-full h-auto" data-alt="candid shot of laughing guests" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVL1w7WzTTZhdwN0MQNuKel9Y12YFIhHCtCncdau5BLkBKMGl54jDy8_Wym1wUj8tS9_j3IykqNncjGYdY9bTNF3jRYMkNVvPmN0a0GBD2SW7yleqMldm9hiZR6ljvqPWd1bb_22OQbO7FMumQSbWiB9s7_rpoS8E7g57zulILp0zqPi4DqzC_1XHcWRClsBcH7Ipb9ub39JlMrKiwrXk2vAGfaEStx2C6fBf1nRwlRiE8djUTgaSuy6aN3dRmZtG_pswY7nytvCE"/>
+<div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+<p class="text-[10px] text-white/90 font-label">Rohan • Haldi</p>
+</div>
+</div>
+<div class="masonry-item group relative rounded-xl overflow-hidden bg-surface-container-low">
+<img class="w-full h-auto" data-alt="decorated wedding table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWC37siKnqLCLMQd-zX3e8wxXGSpkoLGKCk0e6dcqvltt_eKHCui4LkxQX_zu6Vf0JWFqWskkqV9f8UH9cfC9_FB1GUoBqPSg8_w80e5xxyg_WYH8kCE-gZD2UPH51PXr_4FPpaxFSPEWLMy5CRohIHueDJY-bzNja-x4vD50N1u4_1YIBxorJdZ0MSeNYUa2JMUQFUE9RGr6Wn00Nu9r2hm2cKqsiL08zVM47jOo2VyJXcWLtWD6_d4f_oxEQspPjwkzj1VvYiF4"/>
+<div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+<p class="text-[10px] text-white/90 font-label">Priya • Reception</p>
+</div>
+</div>
+<div class="masonry-item group relative rounded-xl overflow-hidden bg-surface-container-low">
+<img class="w-full h-auto" data-alt="bokeh shot of dancing guests" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfn-uOa-cNaouCtdL5vjZj_egmHPOPDA-S4Y5c0e_UmM7ZeC24pPXlag_5PESrPv9qkJDpryJhqbCIAIHqfdLmcMUEF4-0Ov66YV_uVvZYAJbQLsqHXWl-x7Oyw_U6Lj8Az2pm7EBRRgVPgJTC0h9dRO2Pgtn5CJwhy3ooJJ4F3z8QkV0zVABHok_UVNwZqhRSmye7OVScQK2xJvK1p94K_0xutG_LaBstX8O7FhRl4QiVtmUCjJfRaXk9qKsPwH8cpUhVhY1zohU"/>
+<div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+<p class="text-[10px] text-white/90 font-label">Anjali • Cocktail</p>
+</div>
+</div>
+<div class="masonry-item group relative rounded-xl overflow-hidden bg-surface-container-low">
+<img class="w-full h-auto" data-alt="portrait of guest in sari" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCbrY2FaRGGWStTDeiWEqptTTR069kUnrpMK-OO_K7HJe8x1RH7DedAkmKCV5SY-XewxfXKJIhgrQESLRfQrhn7vLyuxVAhpqNm768yJQll-n9ZOQtcu38giihFAAZI5z4HZYD1NTh7MA2xpkg7S7AQ8YrizFb5MxA1cPyOHCUJiAeoWl4njw8GNOdOd5T3F5W7dyLY0CKIv0wmQ9XbGT6jt1RDYSyMwAUejFoN9R2Wf2sUJ70z_rMpybUdZ_g6lBJ38onukDIPj8"/>
+<div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+<p class="text-[10px] text-white/90 font-label">Vikram • Ceremony</p>
+</div>
+</div>
+</div>
+<!-- My Uploads View (Hidden by default) -->
+<div class="masonry-grid hidden" id="uploads-view">
+<!-- My Upload Item 1 (Approved) -->
+<div class="masonry-item relative rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/30">
+<img class="w-full h-auto" data-alt="close-up of henna" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0UV51lffeeEe-dOQbW-Ri33qGpZcC7UFnHdzrigsy0_PiuDXCeomLmBGM0LP6HfwMNnc0yuKycPSOtlcdmYBwSBTGGBu0eK91OtP3L8Gd3cORv7NPtcqUazFitIvgX1gaedchtORcz77hk02mq4JYZU_sO5snPsGdhCeC7TTneK0Coy7y0Qps-OUApqyo4RZ3T3zcUlDuGr7PX1m6pWBbviRhot57lDyaWojiKgHsqIGnyHKaDSfedOgggrFvhqm7w6SyEUwaE0M"/>
+<div class="absolute top-3 left-3 px-2 py-1 rounded-full bg-emerald-500/90 text-[10px] text-white font-bold flex items-center gap-1 shadow-sm backdrop-blur-sm">
+<span class="material-symbols-outlined text-[10px] !leading-none">check_circle</span> Approved
+            </div>
+</div>
+<!-- My Upload Item 2 (Pending) -->
+<div class="masonry-item relative rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/30 grayscale-[0.5]">
+<img class="w-full h-auto" data-alt="vibrant haldi paste" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSGpm9m50J206oZiDJVAwY1s8M2DBc3SF-j98TMEFOVlme1RDNgSDzFfX-CPNhuUoAH2bmtY5csdux1unJ2vDRAUODi83aBwGzfcgv5D9Z5aDxuky3dTNKybzKsy1wovKfs554rCGZbUEmJG1B4lAB0XxUnGCvh8X-CD8eGCqD3oysfTeCdQ4pkdnefDrltsw1YOw6XVGAejEkreoGiIthUSxTanSgSzZ1UieMxOG89HoptKi_-Jqt-ZZcqghirRtYpIciEPXWnDM"/>
+<div class="absolute top-3 left-3 px-2 py-1 rounded-full bg-amber-500/90 text-[10px] text-white font-bold flex items-center gap-1 shadow-sm backdrop-blur-sm">
+<span class="material-symbols-outlined text-[10px] !leading-none">schedule</span> Pending Review
+            </div>
+</div>
+<!-- My Upload Item 3 (Approved) -->
+<div class="masonry-item relative rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/30">
+<img class="w-full h-auto" data-alt="groom and friends" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCezerjPf24tDYvco6ZOzDdc9nW91QmHvryn6sq4dHL8xPY88bAT2H69V6aMxZSojP46z6a4Ge4ATktEFeSr7gqjNG_ii_FMR70WKXOKJeJtHYhLEVGKQVeSrS9K2trJaz986udXOXCnhZGZYdvkxWOT8POJ6Y2-xpx4N9xKLVebW-JWqFPvQdc3wDkfoHlIghqLouB7rRKeZXdyfwwDzp24dRnDQsBdTy2HnLql2aAFgkE4e7j2wxmx4Bo2px7sv1654kRtNM1DUU"/>
+<div class="absolute top-3 left-3 px-2 py-1 rounded-full bg-emerald-500/90 text-[10px] text-white font-bold flex items-center gap-1 shadow-sm backdrop-blur-sm">
+<span class="material-symbols-outlined text-[10px] !leading-none">check_circle</span> Approved
+            </div>
+</div>
+</div>
+</main>
+<!-- Upload FAB -->
+<button class="fixed bottom-24 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-rose-700 text-white shadow-lg active:scale-95 transition-all duration-300">
+<span class="material-symbols-outlined text-2xl">add_a_photo</span>
+</button>
+<!-- BottomNavBar (from COMPONENTS_14) -->
+<nav class="fixed bottom-6 left-0 right-0 z-50 flex justify-around items-center px-4 h-16">
+<div class="flex justify-around items-center w-[90%] max-w-md bg-[#fefcf4]/80 dark:bg-stone-950/80 backdrop-blur-xl rounded-full border border-stone-200 dark:border-stone-800 shadow-xl shadow-rose-900/5 h-full">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-3 hover:text-rose-600 dark:hover:text-rose-300 transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-sans text-[11px] uppercase tracking-widest font-semibold">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-3 hover:text-rose-600 dark:hover:text-rose-300 transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-sans text-[11px] uppercase tracking-widest font-semibold">Events</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-gradient-to-tr from-rose-700 to-rose-400 text-white rounded-full p-3 scale-110 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">photo_library</span>
+<span class="font-sans text-[11px] uppercase tracking-widest font-semibold">Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-3 hover:text-rose-600 dark:hover:text-rose-300 transition-colors" href="#">
+<span class="material-symbols-outlined">how_to_reg</span>
+<span class="font-sans text-[11px] uppercase tracking-widest font-semibold">RSVP</span>
+</a>
+</div>
+</nav>
+<script>
+    const communityTab = document.getElementById('community-tab');
+    const uploadsTab = document.getElementById('uploads-tab');
+    const communityView = document.getElementById('community-view');
+    const uploadsView = document.getElementById('uploads-view');
+
+    communityTab.addEventListener('click', () => {
+        communityTab.classList.add('bg-white', 'text-primary', 'shadow-sm');
+        communityTab.classList.remove('text-on-surface-variant', 'font-medium');
+        communityTab.classList.add('font-semibold');
+        
+        uploadsTab.classList.remove('bg-white', 'text-primary', 'shadow-sm', 'font-semibold');
+        uploadsTab.classList.add('text-on-surface-variant', 'font-medium');
+        
+        communityView.classList.remove('hidden');
+        uploadsView.classList.add('hidden');
+    });
+
+    uploadsTab.addEventListener('click', () => {
+        uploadsTab.classList.add('bg-white', 'text-primary', 'shadow-sm');
+        uploadsTab.classList.remove('text-on-surface-variant', 'font-medium');
+        uploadsTab.classList.add('font-semibold');
+        
+        communityTab.classList.remove('bg-white', 'text-primary', 'shadow-sm', 'font-semibold');
+        communityTab.classList.add('text-on-surface-variant', 'font-medium');
+        
+        uploadsView.classList.remove('hidden');
+        communityView.classList.add('hidden');
+    });
+</script>
+</body></html>

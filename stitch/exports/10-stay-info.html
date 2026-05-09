@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#6f3a00",
+                    "on-primary-fixed-variant": "#600013",
+                    "on-secondary-fixed": "#532a00",
+                    "inverse-primary": "#ff5261",
+                    "tertiary-dim": "#6c5600",
+                    "secondary": "#995200",
+                    "on-primary-container": "#4e000e",
+                    "surface-container-low": "#fbf9f1",
+                    "surface-container": "#f5f4eb",
+                    "surface-bright": "#fefcf4",
+                    "surface-dim": "#e4e3d8",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#ff757b",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#e6c047",
+                    "secondary-fixed-dim": "#ffb375",
+                    "outline": "#81817a",
+                    "error-container": "#f95630",
+                    "tertiary-fixed": "#f5ce53",
+                    "on-tertiary-fixed": "#413200",
+                    "primary-fixed-dim": "#ff5866",
+                    "inverse-surface": "#0e0f0a",
+                    "secondary-container": "#ffc69a",
+                    "background": "#fefcf4",
+                    "outline-variant": "#bab9b2",
+                    "on-secondary-fixed-variant": "#7c4100",
+                    "secondary-fixed": "#ffc69a",
+                    "on-surface-variant": "#65655f",
+                    "on-background": "#383833",
+                    "surface": "#fefcf4",
+                    "primary": "#ca0033",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#000000",
+                    "surface-container-highest": "#e9e9de",
+                    "on-error-container": "#520c00",
+                    "primary-dim": "#b3002c",
+                    "primary-container": "#ff757b",
+                    "tertiary-container": "#f5ce53",
+                    "on-tertiary-container": "#584500",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#383833",
+                    "secondary-dim": "#874800",
+                    "surface-container-high": "#efeee5",
+                    "surface-tint": "#ca0033",
+                    "surface-variant": "#e9e9de",
+                    "on-tertiary-fixed-variant": "#634e00",
+                    "tertiary": "#7b6100",
+                    "inverse-on-surface": "#9e9d96",
+                    "error-dim": "#b92902",
+                    "error": "#be2d06"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .mandala-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0c2.5 10 7.5 15 15 15s12.5-5 15-15c2.5 10 10 17.5 20 20-10 2.5-17.5 10-20 20 2.5-10 7.5-15 15-15s12.5 5 15 15c-2.5-10-10-17.5-20-20 10-2.5 17.5-10 20-20-10-2.5-17.5-10-20-20 2.5 10 7.5 15 15 15s12.5-5 15-15' fill='%237b6100' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fefcf4]/80 dark:bg-[#1c1b17]/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.05)]">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#ca0033] cursor-pointer">menu</span>
+</div>
+<h1 class="text-2xl font-serif italic tracking-wide text-[#ca0033] dark:text-[#ffb3b8]">A &amp; S Wedding</h1>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="Profile Avatar" class="w-full h-full object-cover" data-alt="Close-up professional portrait of a guest in elegant wedding attire with soft background lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9rS1SVvfXQn4F-TuFLHFOPpMwdbO2uG_xHkMoETmka4kPzhXKYJrNAcZ-I77g0l7t2-fCLVT54-6MxttHuYxtYfzReCS59kOMQhNpNtFn8LNuj09929A9OESNT1Af-N4KJFva7iV-1RAd2muW5_eT6sZZ9bGCv1W9HIDC0_uzclzCSWKrxIdEVVqAWAcswCcAYXHVim6cNsLczPqXrwaUaAwuugRCxsgAp83hEaed-SIJtKWvQc0HwFMR57Ra0ofSJizbBHOHq8Q"/>
+</div>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto space-y-12">
+<!-- Hero Header -->
+<section class="text-center space-y-4">
+<span class="font-label text-tertiary uppercase tracking-[0.2em] text-xs font-semibold">Your Stay Experience</span>
+<h2 class="font-headline text-4xl md:text-5xl text-on-surface leading-tight">Welcome Home</h2>
+<div class="w-16 h-[2px] bg-tertiary/30 mx-auto"></div>
+<p class="font-body text-on-surface-variant max-w-md mx-auto text-balance">We've arranged a luxurious stay to ensure your comfort throughout the wedding festivities.</p>
+</section>
+<!-- Accommodation Details Card -->
+<section class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-tr from-tertiary/10 to-transparent rounded-xl blur opacity-25"></div>
+<div class="relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm mandala-bg border border-outline-variant/10">
+<div class="aspect-[16/9] w-full overflow-hidden">
+<img alt="ITC Grand Chola" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Grand luxury hotel facade with ornate architecture and golden night lighting, opulent Indian heritage style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTUPQrPGi7kfjmXpfKfCrauU0gwCbr1qcrU4gfwIhv_WIGDnl6km90RRBmXzuZeFBMBTjcH8lNNiiIUxJv6TBfQpy1fJAztos8Lt8CaD7NKjug87PuHvhC7o9Y3HdQ_ujYrKSUznohVHtFieyXetvP5zFsBUoc_8kaBDbcxY16mJKmfOGBIOx4RY-ZUQHhinVpzTNXY4kYzdbYSEz1VIAlp5_DO4LLnJXMpLFBOI1HlfiDU-OVZ82STpPUVRuo3K7JPc3mM7Ckvtw"/>
+</div>
+<div class="p-8 space-y-6">
+<div class="space-y-2">
+<h3 class="font-headline text-2xl text-primary">ITC Grand Chola, Chennai</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">
+                            63, Anna Salai, Guindy, <br/>
+                            Chennai, Tamil Nadu 600032
+                        </p>
+</div>
+<button class="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-primary-container text-on-primary font-semibold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-sm">near_me</span>
+<span>Navigate to Venue</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Your Room Assignment Section -->
+<section class="space-y-6">
+<div class="flex items-center gap-4">
+<h3 class="font-headline text-xl text-on-surface shrink-0">Your Room Assignment</h3>
+<div class="h-[1px] w-full bg-outline-variant/20"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Room Number Card -->
+<div class="bg-surface-container-low p-6 rounded-xl space-y-4 border border-outline-variant/10">
+<div class="flex items-center gap-3 text-tertiary">
+<span class="material-symbols-outlined">hotel</span>
+<span class="font-label text-xs uppercase tracking-widest font-bold">Reservation</span>
+</div>
+<div class="space-y-1">
+<p class="text-3xl font-headline text-on-surface">Suite 402</p>
+<p class="text-sm text-on-surface-variant font-medium">Grand Luxury Collection</p>
+</div>
+</div>
+<!-- Check-in/Out Card -->
+<div class="bg-surface-container-high p-6 rounded-xl space-y-4 border border-outline-variant/10">
+<div class="flex items-center gap-3 text-tertiary">
+<span class="material-symbols-outlined">schedule</span>
+<span class="font-label text-xs uppercase tracking-widest font-bold">Timings</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<p class="text-xs text-on-surface-variant uppercase font-bold">Check-In</p>
+<p class="font-headline text-lg">14:00</p>
+</div>
+<div class="space-y-1">
+<p class="text-xs text-on-surface-variant uppercase font-bold">Check-Out</p>
+<p class="font-headline text-lg">12:00</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Itinerary Snapshot -->
+<section class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 space-y-6">
+<h3 class="font-headline text-xl text-center">Upcoming at Venue</h3>
+<div class="space-y-8 relative">
+<div class="flex gap-6 items-start">
+<div class="pt-1">
+<div class="w-3 h-3 rounded-full bg-primary ring-4 ring-primary-container/30"></div>
+</div>
+<div class="space-y-1">
+<p class="font-label text-xs text-tertiary font-bold">TODAY, 19:30</p>
+<p class="font-headline text-lg">Sangeet Ceremony</p>
+<p class="text-sm text-on-surface-variant">Rajendra Grand Ballroom, Ground Floor</p>
+</div>
+</div>
+<div class="flex gap-6 items-start opacity-50">
+<div class="pt-1">
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+</div>
+<div class="space-y-1">
+<p class="font-label text-xs text-on-surface-variant font-bold">TOMORROW, 09:00</p>
+<p class="font-headline text-lg">Muhurtham</p>
+<p class="text-sm text-on-surface-variant">Kaveri Terrace Garden</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-6 left-0 right-0 z-50 flex justify-around items-center h-16 px-4">
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md rounded-full border border-[#bab9b2]/15 bg-[#fefcf4]/80 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(56,56,51,0.1)] flex justify-around items-center h-16">
+<a class="flex flex-col items-center justify-center text-[#383833]/50 dark:text-[#fefcf4]/50 hover:text-[#ca0033] transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#383833]/50 dark:text-[#fefcf4]/50 hover:text-[#ca0033] transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-medium">Events</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#383833]/50 dark:text-[#fefcf4]/50 hover:text-[#ca0033] transition-colors" href="#">
+<span class="material-symbols-outlined">photo_library</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-medium">Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#ca0033] dark:text-[#ffb3b8] font-bold scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mail</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-medium">RSVP</span>
+</a>
+</div>
+</nav>
+</body></html>
