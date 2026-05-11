@@ -114,6 +114,52 @@ export default function StayInfo() {
           </div>
         </section>
 
+        {/* Getting here */}
+        <section className="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 space-y-6">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="material-symbols-outlined text-tertiary">flight</span>
+            <h3 className="font-headline text-xl">Getting Here</h3>
+          </div>
+          <div className="space-y-4">
+            <div className="flex gap-4 items-start">
+              <div className="w-8 h-8 rounded-full bg-tertiary-container/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="material-symbols-outlined text-tertiary text-sm">flight_land</span>
+              </div>
+              <div className="space-y-0.5">
+                <p className="font-headline text-base text-on-surface">Nearest International Airport</p>
+                <p className="text-sm text-on-surface-variant leading-relaxed">
+                  New Delhi (Indira Gandhi International Airport) is the closest international gateway to arrive in India.
+                </p>
+              </div>
+            </div>
+            <div className="h-px bg-outline-variant/15" />
+            <div className="flex gap-4 items-start">
+              <div className="w-8 h-8 rounded-full bg-tertiary-container/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="material-symbols-outlined text-tertiary text-sm">connecting_airports</span>
+              </div>
+              <div className="space-y-0.5">
+                <p className="font-headline text-base text-on-surface">Onward to the Venue</p>
+                <p className="text-sm text-on-surface-variant leading-relaxed">
+                  From Delhi, take a domestic flight to Chandigarh — or hop in a taxi straight to the venue.
+                </p>
+              </div>
+            </div>
+            <div className="h-px bg-outline-variant/15" />
+            <a
+              href="tel:+14377775369"
+              className="flex gap-4 items-center group"
+            >
+              <div className="w-8 h-8 rounded-full bg-secondary-container/30 flex items-center justify-center flex-shrink-0">
+                <span className="material-symbols-outlined text-secondary text-sm">call</span>
+              </div>
+              <div>
+                <p className="font-headline text-base text-on-surface group-hover:text-primary transition-colors">Any questions? Message us</p>
+                <p className="text-sm text-secondary font-medium tracking-wide">+1-437-777-5369</p>
+              </div>
+            </a>
+          </div>
+        </section>
+
         {/* Itinerary snapshot */}
         <section className="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 space-y-6">
           <h3 className="font-headline text-xl text-center">Upcoming at Venue</h3>
@@ -121,7 +167,7 @@ export default function StayInfo() {
             {events.map((event, i) => {
               const isFirst = i === 0
               return (
-                <div key={event.id ?? event.slug} className={`flex gap-6 items-start ${!isFirst ? 'opacity-50' : ''}`}>
+                <div key={event.slug} className={`flex gap-6 items-start ${!isFirst ? 'opacity-50' : ''}`}>
                   <div className="pt-1 flex-shrink-0">
                     <div className={`w-3 h-3 rounded-full ${isFirst ? 'bg-primary ring-4 ring-primary-container/30' : 'bg-outline-variant'}`} />
                   </div>

@@ -13,7 +13,7 @@ export const WEDDING = {
 
   // ── Our Story section (Home page) ────────────────────────────
   ourStory: {
-    photo: 'https://oxmhdnheylqekqekkwnk.supabase.co/storage/v1/object/public/gallery/couple/our-story-2.png',
+    photo: '/images/our-story.png',
     text:
       'What began as a simple volunteer event and playful banter over UNO blossomed into something beautiful. ' +
       'From puppy yoga to quiet, cherished moments, we didn\'t just grow together — we became each other\'s home.\n\n' +
@@ -76,7 +76,7 @@ export const WEDDING = {
       venue_name:   'TBD',
       venue_address:'Karnal, Haryana',
       dress_code:   'Green Festive / Ethnic',
-      description:  'Haathon pe mehndi ka noor hai, aaj har dil thoda majboor hai (to dance)',
+      description:  'Haathon pe mehndi ka noor hai, aaj har dil thoda majboor hai (to dance) 🌿',
       icon:         'draw',
       
     },
@@ -102,12 +102,12 @@ export const WEDDING = {
       venue_name:   'Sunlit Courtyard',
       venue_address:'Roche Harbour, Chandigarh, Punjab',
       dress_code:   'Yellow Festive / Ethnic',
-      description:  'Naach-gaana aur haldi ki holi, Join us with your family & toli!',
+      description:  'Naach-gaana aur haldi ki holi, join us with your family & toli! 🌼',
       icon:         'brightness_7',
     },
     {
       slug:         'wedding',
-      name:         '7 Vachan',
+      name:         'Saat(7) - Vachan',
       ceremony_label: 'Pheras',
       event_date:   '2027-02-19',
       event_time:   '7:00 PM onwards',

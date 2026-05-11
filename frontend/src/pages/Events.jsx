@@ -37,7 +37,7 @@ export default function Events() {
         {events.map((event, index) => {
           const isReverse = index % 2 !== 0
           return (
-            <div key={event.id} className={`flex flex-col ${isReverse ? 'md:flex-row-reverse' : 'md:flex-row'} gap-6 items-center group`}>
+            <div key={event.slug} className={`flex flex-col ${isReverse ? 'md:flex-row-reverse' : 'md:flex-row'} gap-6 items-center group`}>
               {/* Image */}
               <div className="w-full md:w-1/3 aspect-[4/3] rounded-xl overflow-hidden shadow-sm relative flex-shrink-0">
                 <img

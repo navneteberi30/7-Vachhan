@@ -49,24 +49,40 @@ export async function fetchApprovedPhotos(eventTag = null) {
   return attachSignedUrls(data)
 }
 
-export async function fetchGuestPhotos(guestId) {
+export async function fetchMyPhotos(authUid) {
   const { data, error } = await supabase
     .from('gallery_photos')
     .select('*')
-    .eq('guest_id', guestId)
+    .eq('uploader_auth_uid', authUid)
     .order('uploaded_at', { ascending: false })
   if (error) throw error
   return attachSignedUrls(data)
 }
 
-export async function uploadPhoto(file, guestId, eventTag) {
+function sanitizeName(name) {
+  return (name || '')
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .substring(0, 30) || 'guest'
+}
+
+export async function uploadPhoto(file, guestId, eventTag, uploaderName = null) {
   validateImageFile(file)
 
   const { data: { user }, error: userError } = await supabase.auth.getUser()
   if (userError || !user) throw new Error('Please sign in again before uploading.')
 
-  const ext = EXTENSION_BY_MIME[file.type]
-  const path = `${guestId}/${crypto.randomUUID()}.${ext}`
+  const ext  = EXTENSION_BY_MIME[file.type]
+  const tag  = eventTag || 'general'
+  // Resolve a human-readable folder name: guest name > Google display name > email prefix > uid
+  const rawName = uploaderName
+    || user.user_metadata?.full_name
+    || user.email?.split('@')[0]
+    || user.id
+  const name = sanitizeName(rawName)
+  // Structure: event_name / user_name / uuid.ext  — easy to navigate in Supabase dashboard
+  const path = `${tag}/${name}/${crypto.randomUUID()}.${ext}`
 
   const { error: uploadError } = await supabase.storage
     .from(BUCKET)
@@ -74,7 +90,7 @@ export async function uploadPhoto(file, guestId, eventTag) {
 
   if (uploadError) {
     if (uploadError.statusCode === '400' || uploadError.message?.includes('Bucket not found')) {
-      throw new Error('Gallery storage not set up yet. Please create a public bucket named "gallery" in Supabase → Storage.')
+      throw new Error('Gallery storage not set up yet. Please create a bucket named "gallery" in Supabase → Storage.')
     }
     throw uploadError
   }
@@ -82,7 +98,8 @@ export async function uploadPhoto(file, guestId, eventTag) {
   const { data, error } = await supabase
     .from('gallery_photos')
     .insert({
-      guest_id: guestId,
+      guest_id: guestId || null,        // null for unlinked users
+      uploader_auth_uid: user.id,       // always set — enables "My Photos" for anyone
       event_tag: eventTag,
       storage_path: path,
       public_url: null,

@@ -1,7 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+import { useEffect } from 'react'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import { SlideInPage, FadePage } from './components/PageTransition'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
 
 import AppLayout    from './layouts/AppLayout'
 import GuestLogin   from './pages/GuestLogin'
@@ -60,6 +67,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <AnimatedRoutes />
       </BrowserRouter>
     </AuthProvider>
