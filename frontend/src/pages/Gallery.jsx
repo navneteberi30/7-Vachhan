@@ -56,8 +56,11 @@ export default function Gallery() {
   }
 
   async function handleRemovePhoto(photo) {
-    if (photo.moderation_status !== 'pending') return
-    if (!window.confirm('Remove this uploaded photo?')) return
+    const approvedNote =
+      photo.moderation_status === 'approved'
+        ? ' It will disappear from the shared gallery for everyone.'
+        : ''
+    if (!window.confirm(`Remove this photo?${approvedNote}`)) return
     try {
       setDeletingPhotoId(photo.id)
       await remove(photo)
@@ -90,22 +93,25 @@ export default function Gallery() {
           </div>
         )}
 
-        {showControls && photo.moderation_status === 'pending' && (
+        {showControls && (
           <>
-            <div className="absolute top-3 left-3 px-2.5 py-1.5 rounded-full text-[10px] text-on-tertiary-container font-semibold flex items-center gap-1 shadow-sm bg-tertiary-container/95 backdrop-blur-sm">
-              <span className="material-symbols-outlined text-[11px]">schedule</span>
-              Pending review
-            </div>
+            {photo.moderation_status === 'pending' && (
+              <div className="absolute top-3 left-3 px-2.5 py-1.5 rounded-full text-[10px] text-on-tertiary-container font-semibold flex items-center gap-1 shadow-sm bg-tertiary-container/95 backdrop-blur-sm">
+                <span className="material-symbols-outlined text-[11px]">schedule</span>
+                Pending review
+              </div>
+            )}
             <button
+              type="button"
               onClick={e => { e.stopPropagation(); handleRemovePhoto(photo) }}
               disabled={deletingPhotoId === photo.id}
-              className="absolute top-3 right-3 px-2.5 py-1.5 rounded-full text-[10px] text-error font-semibold flex items-center gap-1 border border-error/15 bg-surface-container-low/90 backdrop-blur-sm shadow-sm hover:bg-error/10 disabled:opacity-60 transition-colors"
-              aria-label="Remove uploaded photo"
+              className="absolute top-3 right-3 px-2.5 py-1.5 rounded-full text-[10px] text-error font-semibold flex items-center gap-1 border border-error/15 bg-surface-container-low/90 backdrop-blur-sm shadow-sm hover:bg-error/10 disabled:opacity-60 transition-colors z-10"
+              aria-label="Delete my photo"
             >
               <span className="material-symbols-outlined text-[12px]">
                 {deletingPhotoId === photo.id ? 'progress_activity' : 'delete'}
               </span>
-              {deletingPhotoId === photo.id ? 'Removing' : 'Remove'}
+              {deletingPhotoId === photo.id ? 'Removing' : 'Delete'}
             </button>
           </>
         )}

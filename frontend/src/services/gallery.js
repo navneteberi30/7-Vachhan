@@ -131,22 +131,23 @@ export async function uploadPhoto(file, guestId, eventTag, uploaderName = null) 
 }
 
 export async function deletePhoto(photo) {
-  const { error } = await supabase
-    .from('gallery_photos')
-    .delete()
-    .eq('id', photo.id)
-
-  if (error) throw error
-
+  // Remove storage first while gallery_photos row still exists (storage RLS joins on gp row).
   if (photo.storage_path) {
     const { error: storageError } = await supabase.storage
       .from(BUCKET)
       .remove([photo.storage_path])
 
     if (storageError) {
-      console.warn('Gallery object cleanup failed:', storageError.message)
+      console.warn('Gallery storage remove:', storageError.message)
     }
   }
+
+  const { error } = await supabase
+    .from('gallery_photos')
+    .delete()
+    .eq('id', photo.id)
+
+  if (error) throw error
 }
 
 export async function approvePhoto(photoId) {
