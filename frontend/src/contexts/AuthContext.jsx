@@ -6,7 +6,7 @@ import { WEDDING } from '../config/wedding'
 const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-  const [authUser, setAuthUser] = useState(null)  // Supabase Auth user (Google identity)
+  const [authUser, setAuthUser] = useState(null)  // Supabase Auth user (Google, email link, etc.)
   const [guest, setGuest]       = useState(null)  // Row from our guests table
   const [loading, setLoading]   = useState(true)
 
@@ -63,11 +63,10 @@ export function AuthProvider({ children }) {
   }, [loading])
 
   /**
-   * Link the signed-in Google account to an invite code.
-   * Called from the login page after Google OAuth completes.
+   * Link the signed-in account to an invite code (after Google or email magic link).
    */
   async function linkCode(inviteCode) {
-    if (!authUser) throw new Error('You must sign in with Google first.')
+    if (!authUser) throw new Error('Sign in first to link your invite code.')
     const updated = await claimInviteCode(inviteCode)
     setGuest(updated)
     return updated
@@ -88,12 +87,12 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={{
-      authUser,           // Google/Supabase auth identity
+      authUser,           // Supabase auth identity
       guest,              // Linked guest record (null if code not yet linked)
       isAdmin,            // true for organizers — `/admin` dashboard
       loading,
       signInWithGoogle,   // () => void — triggers Google OAuth redirect
-      linkCode,           // (code) => Promise — links invite code to Google account
+      linkCode,           // (code) => Promise — links invite code to current account
       logout,
     }}>
       {children}

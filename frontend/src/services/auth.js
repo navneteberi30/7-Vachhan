@@ -1,5 +1,14 @@
 import { supabase, isConfigured } from './supabase'
 
+/** Human-readable label for the sign-in method (Google, email link, etc.). */
+export function getAuthProviderLabel(user) {
+  if (!user?.identities?.length) return 'Signed in'
+  const providers = new Set(user.identities.map(i => i.provider))
+  if (providers.has('google')) return 'Signed in with Google'
+  if (providers.has('email')) return 'Signed in with email'
+  return 'Signed in'
+}
+
 /**
  * Kick off Google OAuth sign-in.
  * Supabase redirects to Google, then back to the app with a session.
@@ -13,6 +22,30 @@ export async function signInWithGoogle() {
         access_type: 'offline',
         prompt: 'select_account',   // always show account picker — good for shared devices
       },
+    },
+  })
+  if (error) throw new Error(error.message)
+}
+
+/**
+ * Send a passwordless magic link to the given email.
+ * User completes sign-in by clicking the link in their inbox (redirects to `/login`).
+ * Requires Email provider + redirect URL allowlist configured in Supabase Dashboard.
+ */
+export async function signInWithEmailMagicLink(email) {
+  if (!isConfigured) throw new Error('Supabase is not configured.')
+
+  const trimmed = email.trim()
+  if (!trimmed) throw new Error('Enter your email address.')
+
+  const origin = typeof window !== 'undefined' ? window.location.origin : ''
+  const emailRedirectTo = `${origin}/login`
+
+  const { error } = await supabase.auth.signInWithOtp({
+    email: trimmed,
+    options: {
+      emailRedirectTo,
+      shouldCreateUser: true,
     },
   })
   if (error) throw new Error(error.message)
@@ -40,7 +73,7 @@ export async function getGuestByUserId(_userId) {
 }
 
 /**
- * Claim an invite code and link it to the currently signed-in Google account.
+ * Claim an invite code and link it to the currently signed-in account.
  * Calls a SECURITY DEFINER RPC function on Supabase so the user can't spoof
  * their identity — the function reads auth.uid() server-side.
  *

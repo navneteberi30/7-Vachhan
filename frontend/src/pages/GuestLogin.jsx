@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { signInWithEmailMagicLink } from '../services/auth'
 import { WEDDING } from '../config/wedding'
 
 // ── Decorative background images (reused from original login) ─────────────────
@@ -12,25 +13,50 @@ export default function GuestLogin() {
   const { authUser, loading: authLoading, signInWithGoogle } = useAuth()
   const navigate = useNavigate()
 
-  const [loading, setLoading] = useState(false)
-  const [error, setError]     = useState(null)
+  const [googleLoading, setGoogleLoading] = useState(false)
+  const [googleError, setGoogleError]     = useState(null)
 
-  // Once Google sign-in completes, send everyone into the app.
-  // Invite-code entry now happens behind the RSVP screen, not here.
+  const [magicEmail, setMagicEmail] = useState('')
+  const [magicLoading, setMagicLoading] = useState(false)
+  const [magicError, setMagicError]     = useState(null)
+  const [magicSent, setMagicSent]       = useState(false)
+
+  // Once sign-in completes (Google or magic-link callback), enter the app.
+  // Invite-code entry happens on the RSVP screen.
   useEffect(() => {
     if (!authLoading && authUser) navigate('/', { replace: true })
   }, [authUser, authLoading, navigate])
 
   async function handleGoogleSignIn() {
-    setError(null)
-    setLoading(true)
+    setGoogleError(null)
+    setGoogleLoading(true)
     try {
       await signInWithGoogle()
       // Google OAuth causes a full page redirect — code below won't run
     } catch (err) {
-      setError(err.message)
-      setLoading(false)
+      setGoogleError(err.message)
+      setGoogleLoading(false)
     }
+  }
+
+  async function handleMagicLink(e) {
+    e.preventDefault()
+    setMagicError(null)
+    setMagicLoading(true)
+    try {
+      await signInWithEmailMagicLink(magicEmail)
+      setMagicSent(true)
+    } catch (err) {
+      setMagicError(err.message)
+    } finally {
+      setMagicLoading(false)
+    }
+  }
+
+  function resetMagicFlow() {
+    setMagicSent(false)
+    setMagicError(null)
+    setMagicEmail('')
   }
 
   return (
@@ -61,15 +87,16 @@ export default function GuestLogin() {
           <div className="mb-8">
             <h1 className="font-headline text-2xl text-on-surface mb-2">Welcome, Guest</h1>
             <p className="text-on-surface-variant font-body text-sm">
-              Sign in with Google to explore the celebration. You can RSVP with your invite code anytime from inside the app.
+              Sign in with Google or request a link by email — no Google account required. RSVP with your invite code anytime from inside the app.
             </p>
           </div>
 
           <div className="space-y-6">
             <button
+              type="button"
               onClick={handleGoogleSignIn}
-              disabled={loading}
-              className="w-full h-14 flex items-center justify-center gap-3 bg-white border border-outline-variant/40 rounded-xl shadow-sm hover:shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 disabled:opacity-60 disabled:cursor-wait"
+              disabled={googleLoading || magicLoading}
+              className="w-full h-14 flex items-center justify-center gap-3 bg-white border border-outline-variant/40 rounded-xl shadow-sm hover:shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 disabled:opacity-60 disabled:cursor-wait disabled:hover:scale-100"
             >
               <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -78,17 +105,81 @@ export default function GuestLogin() {
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
               </svg>
               <span className="text-sm font-semibold text-gray-700">
-                {loading ? 'Redirecting to Google…' : 'Continue with Google'}
+                {googleLoading ? 'Redirecting to Google…' : 'Continue with Google'}
               </span>
             </button>
 
-            {error && (
-              <p className="text-error text-sm font-medium text-center">{error}</p>
+            {googleError && (
+              <p className="text-error text-sm font-medium text-center">{googleError}</p>
+            )}
+
+            <div className="relative flex items-center gap-3 py-1">
+              <div className="h-px flex-1 bg-outline-variant/30" />
+              <span className="font-label text-[10px] uppercase tracking-[0.2em] text-outline">or</span>
+              <div className="h-px flex-1 bg-outline-variant/30" />
+            </div>
+
+            {magicSent ? (
+              <div className="rounded-xl border border-tertiary/20 bg-surface-container-low p-5 text-center">
+                <span className="material-symbols-outlined mb-2 block text-3xl text-tertiary" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  mark_email_read
+                </span>
+                <p className="font-headline text-lg text-on-surface mb-1">Check your email</p>
+                <p className="text-on-surface-variant font-body text-sm">
+                  We sent a sign-in link to <span className="font-medium text-on-surface">{magicEmail.trim()}</span>. Open it on this device to continue.
+                </p>
+                <button
+                  type="button"
+                  onClick={resetMagicFlow}
+                  className="mt-4 text-sm font-semibold text-primary underline decoration-primary/30 underline-offset-2 hover:decoration-primary"
+                >
+                  Use a different email
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleMagicLink} className="space-y-3">
+                <label className="font-label block text-[11px] font-bold uppercase tracking-widest text-secondary" htmlFor="magic-email">
+                  Email address
+                </label>
+                <input
+                  id="magic-email"
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  inputMode="email"
+                  value={magicEmail}
+                  onChange={e => setMagicEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  disabled={magicLoading || googleLoading}
+                  className="w-full rounded-xl border border-outline-variant/40 bg-white px-4 py-3 text-on-surface shadow-sm placeholder:text-outline-variant/60 focus:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary/15 disabled:opacity-60"
+                />
+                <button
+                  type="submit"
+                  disabled={magicLoading || googleLoading || !magicEmail.trim()}
+                  className="cta-gradient flex h-12 w-full items-center justify-center gap-2 rounded-xl font-body text-sm font-semibold text-on-primary shadow-md shadow-primary/15 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
+                >
+                  {magicLoading ? (
+                    <>
+                      <span className="material-symbols-outlined animate-spin text-xl">progress_activity</span>
+                      Sending link…
+                    </>
+                  ) : (
+                    <>
+                      <span className="material-symbols-outlined text-xl">mail</span>
+                      Email me a sign-in link
+                    </>
+                  )}
+                </button>
+                {magicError && (
+                  <p className="text-error text-sm font-medium">{magicError}</p>
+                )}
+              </form>
             )}
           </div>
 
           <p className="mt-8 text-center text-on-surface-variant font-body text-xs">
-            Invited by {WEDDING.groomName} &amp; {WEDDING.brideName}? Bring your invite code with you — you'll be asked for it once when you RSVP.
+            Invited by {WEDDING.groomName} &amp; {WEDDING.brideName}? Bring your invite code — you&apos;ll be asked for it once when you RSVP.
           </p>
         </div>
 

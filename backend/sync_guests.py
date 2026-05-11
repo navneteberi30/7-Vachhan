@@ -85,7 +85,7 @@ def build_invite_message(name: str, code: str) -> str:
         f"You're invited to {COUPLE_LABEL}'s wedding — RSVP, events, gallery, and more on our site.\n\n"
         f'Your invite code: {code}\n\n'
         f'Open the app: {login_url}\n\n'
-        'Sign in with Google, then enter your invite code when prompted.\n\n'
+        'Sign in with Google or request an email link on that page, then enter your invite code when prompted.\n\n'
         f'— {COUPLE_LABEL}'
     )
 

@@ -2,7 +2,14 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useEvents } from '../hooks/useEvents'
 import { submitRSVP, fetchGuestRSVPs } from '../services/events'
+import { getAuthProviderLabel } from '../services/auth'
 import { WEDDING } from '../config/wedding'
+
+// Decorative assets — same family as GuestLogin for visual continuity inside the app shell.
+const GATE_DECOR = {
+  mandalaL: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAKxx7B0Fft-Qu3iFBE1UyqHc-pFuw7LOcnXJN8CjCSldgsSix27646DSwVV6SJv8bhli_NL9bD9bYipuTKLxAghxUUI5s51zSuV-bBk_lS9ETeaE3pGDUV9dIshS4F2L4zUewLca-yZ1_ga6US_MJG5vMk72uC1uBOxbgzOwfBnf6lpIqWX-2Z-oXbibL33LeRpxkoG68RbK_SygYPQ-dNC7kob_iofypROtqVNOKQ9HSMrdXSA437rDBUQRo7PngJ1oOCzQvTH2c',
+  mandalaR: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCliyWEJvG07bgd7yo0dTj7ggJFXmu4adk9XTus1foyUFnj-o9u7v4oY3XgZY2JvtOHEdKUBN10Y2pM3Y0atb5Ms0RuUkFLoiRhnJIHgX0kaXMnH4mJt549liDi0StFPks5lMFLoxZQxwZtdKQOIYOg2CQ0MLFd_knL9tK4zzMLmcJmcJb99TFHreNKkWUqBkQgr820u9irGD64r0lkMFcMWZMxTk7T3d1W6mOflPuk2gKhQBBDAH0f5DCLN-AiEnHKPihaCUPC2J8',
+}
 
 const EVENT_ICONS = { haldi: 'spa', cocktail: 'celebration', mehndi: 'local_florist', wedding: 'favorite' }
 const NEEDS_COUNT = ['haldi', 'cocktail', 'mehndi', 'wedding']
@@ -115,7 +122,7 @@ function RSVPSummary({ existingRSVPs, events, onEdit }) {
   )
 }
 
-// ── Invite-code gate (Google signed in, but no guest record yet) ──────────────
+// ── Invite-code gate (signed in, but no guest record yet) ───────────────────────
 function InviteCodeGate() {
   const { authUser, linkCode } = useAuth()
 
@@ -138,93 +145,131 @@ function InviteCodeGate() {
   }
 
   return (
-    <div className="bg-background text-on-surface">
-      <section className="pt-12 pb-6 text-center px-6 max-w-2xl mx-auto">
-        <span className="material-symbols-outlined text-5xl text-tertiary mb-4 block" style={{ fontVariationSettings: "'FILL' 1" }}>
-          mail
-        </span>
-        <h2 className="font-headline text-4xl text-primary mb-2">RSVP is Invite-Only</h2>
-        <p className="font-body text-on-surface-variant">
-          Enter the invite code from your wedding card to unlock RSVP. We'll remember it for next time.
-        </p>
-        <div className="mt-6 flex justify-center">
-          <div className="h-px w-24 bg-tertiary/20" />
+    <div className="relative bg-background text-on-surface min-h-[calc(100vh-8rem)] overflow-hidden">
+      {/* Soft mandala accents — matches GuestLogin / heirloom theme */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-8 -left-[12%] h-64 w-64 opacity-[0.045]">
+          <img src={GATE_DECOR.mandalaL} alt="" className="h-full w-full object-contain" />
         </div>
-      </section>
+        <div className="absolute bottom-[15%] -right-[10%] h-64 w-64 rotate-180 opacity-[0.045]">
+          <img src={GATE_DECOR.mandalaR} alt="" className="h-full w-full object-contain" />
+        </div>
+      </div>
 
-      <div className="max-w-md mx-auto px-6 pb-12">
-        <div className="glass-panel p-8 rounded-2xl border border-white/40 shadow-sm">
-          <div className="flex items-center gap-3 mb-6">
-            {authUser?.user_metadata?.avatar_url
-              ? (
+      <div className="relative z-10">
+        <section className="mx-auto max-w-lg px-6 pb-2 pt-10 text-center">
+          <p className="font-label mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-tertiary">
+            Your invitation
+          </p>
+          <div className="mx-auto mb-5 flex h-[4.25rem] w-[4.25rem] items-center justify-center rounded-full bg-gradient-to-br from-tertiary/12 to-primary/8 ring-1 ring-tertiary/15">
+            <span
+              className="material-symbols-outlined text-[2.25rem] text-tertiary"
+              style={{ fontVariationSettings: "'FILL' 1" }}
+            >
+              mark_email_read
+            </span>
+          </div>
+          <h2 className="font-headline mb-3 text-3xl italic tracking-tight text-primary md:text-4xl">
+            RSVP is Invite-Only
+          </h2>
+          <p className="font-body mx-auto max-w-md text-sm leading-relaxed text-on-surface-variant md:text-base">
+            Enter the code from your wedding card to unlock RSVP. We&apos;ll save it to this account so you won&apos;t need it again.
+          </p>
+          <div className="mt-7 flex justify-center">
+            <div className="h-px w-20 bg-tertiary/25" />
+          </div>
+        </section>
+
+        <div className="mx-auto max-w-md px-6 pb-16 pt-4">
+          <div className="glass-panel mandala-bg relative overflow-hidden rounded-2xl border border-white/40 p-6 shadow-[0_32px_64px_-12px_rgba(56,56,51,0.08)] md:p-8">
+            <div className="pointer-events-none absolute -right-2 -top-2 opacity-[0.07]">
+              <span className="material-symbols-outlined text-7xl text-tertiary">filter_vintage</span>
+            </div>
+
+            <div className="relative mb-8 flex items-center gap-4 rounded-xl border border-outline-variant/15 bg-surface-container-lowest p-4 shadow-sm">
+              {authUser?.user_metadata?.avatar_url ? (
                 <img
                   src={authUser.user_metadata.avatar_url}
                   alt=""
-                  className="w-10 h-10 rounded-full border-2 border-primary/20"
+                  className="h-12 w-12 shrink-0 rounded-full border-2 border-primary/15 object-cover"
                 />
-              )
-              : (
-                <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-sm">
+              ) : (
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary-container text-sm font-bold text-on-secondary-container">
                   {(authUser?.user_metadata?.full_name || authUser?.email || '?').charAt(0).toUpperCase()}
                 </div>
-              )
-            }
-            <div>
-              <p className="text-sm font-semibold text-on-surface">
-                {authUser?.user_metadata?.full_name || authUser?.email}
-              </p>
-              <p className="text-xs text-on-surface-variant">Signed in with Google</p>
-            </div>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-8">
-            <div className="relative">
-              <label
-                className="font-label text-[11px] uppercase tracking-widest text-secondary font-bold absolute -top-2 left-0 z-10"
-                htmlFor="invite_code"
-              >
-                Invite Code
-              </label>
-              <input
-                id="invite_code"
-                type="text"
-                value={inviteCode}
-                onChange={e => setInviteCode(e.target.value.toUpperCase())}
-                placeholder="e.g. NS-A7X2"
-                required
-                autoComplete="off"
-                autoCapitalize="characters"
-                className="w-full bg-surface-container-high border-0 border-b-2 border-transparent focus:border-tertiary focus:ring-0 rounded-none pt-4 pb-2 px-0 text-on-surface placeholder:text-outline-variant/50 transition-all duration-300 font-mono tracking-widest text-base"
-              />
-            </div>
-
-            {error && (
-              <div className={`rounded-xl p-4 text-sm ${
-                error.includes('already linked')
-                  ? 'bg-amber-50 text-amber-800 border border-amber-200'
-                  : 'bg-error/10 text-error'
-              }`}>
-                <p className="font-medium mb-1">
-                  {error.includes('already linked') ? 'Code already linked' : 'Invalid code'}
+              )}
+              <div className="min-w-0 text-left">
+                <p className="truncate font-headline text-lg text-on-surface">
+                  {authUser?.user_metadata?.full_name || authUser?.email}
                 </p>
-                <p className="text-xs opacity-80">{error}</p>
+                <p className="mt-0.5 flex items-center gap-1.5 font-label text-[11px] uppercase tracking-wider text-outline">
+                  <span className="material-symbols-outlined text-[14px] text-secondary">account_circle</span>
+                  {getAuthProviderLabel(authUser)}
+                </p>
               </div>
-            )}
+            </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full h-14 cta-gradient text-on-primary font-body font-semibold rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-wait"
-            >
-              <span>{loading ? 'Linking…' : 'Unlock RSVP'}</span>
-              {!loading && <span className="material-symbols-outlined text-xl">arrow_right_alt</span>}
-            </button>
-          </form>
+            <form onSubmit={handleSubmit} className="relative space-y-6">
+              <div>
+                <label className="font-label mb-2 block text-[11px] font-bold uppercase tracking-widest text-secondary" htmlFor="invite_code">
+                  Invite code
+                </label>
+                <div className="rounded-xl border-2 border-outline-variant/25 bg-surface-container-high/90 transition-colors focus-within:border-tertiary/70 focus-within:bg-white focus-within:shadow-[0_0_0_3px_rgba(123,97,0,0.08)]">
+                  <input
+                    id="invite_code"
+                    type="text"
+                    value={inviteCode}
+                    onChange={e => setInviteCode(e.target.value.toUpperCase())}
+                    placeholder="e.g. NS-A7X2"
+                    required
+                    autoComplete="off"
+                    autoCapitalize="characters"
+                    className="w-full rounded-xl border-0 bg-transparent px-4 py-3.5 font-mono text-lg tracking-[0.18em] text-on-surface placeholder:text-outline-variant/45 focus:ring-0"
+                  />
+                </div>
+              </div>
 
-          <p className="mt-6 text-center text-on-surface-variant font-body text-xs">
-            Don't have a code? Reach out to {WEDDING.groomName} &amp; {WEDDING.brideName} —
-            you can still browse the rest of the app in the meantime.
-          </p>
+              {error && (
+                <div
+                  className={`rounded-xl p-4 text-sm ${
+                    error.includes('already linked')
+                      ? 'border border-amber-200 bg-amber-50 text-amber-800'
+                      : 'bg-error/10 text-error'
+                  }`}
+                >
+                  <p className="mb-1 flex items-center gap-2 font-medium">
+                    <span className="material-symbols-outlined text-[18px]">
+                      {error.includes('already linked') ? 'link_off' : 'error'}
+                    </span>
+                    {error.includes('already linked') ? 'Code already linked' : 'Invalid code'}
+                  </p>
+                  <p className="pl-[26px] text-xs opacity-90">{error}</p>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="cta-gradient flex h-14 w-full items-center justify-center gap-2 rounded-full font-body font-semibold text-on-primary shadow-xl shadow-primary/15 transition-transform duration-150 hover:scale-[1.02] active:scale-[0.98] disabled:cursor-wait disabled:opacity-60 disabled:hover:scale-100"
+              >
+                {loading ? (
+                  <>
+                    <span className="material-symbols-outlined animate-spin text-xl">progress_activity</span>
+                    Linking…
+                  </>
+                ) : (
+                  <>
+                    Unlock RSVP
+                    <span className="material-symbols-outlined text-xl">arrow_forward</span>
+                  </>
+                )}
+              </button>
+            </form>
+
+            <p className="mt-8 border-t border-outline-variant/15 pt-6 text-center font-body text-xs leading-relaxed text-on-surface-variant">
+              Don&apos;t have a code? Message {WEDDING.groomName} &amp; {WEDDING.brideName} — you can still enjoy Home, Events &amp; Gallery anytime.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -236,7 +281,7 @@ export default function RSVPForm() {
   const { authUser, guest } = useAuth()
   const { events } = useEvents()
 
-  // Google signed in but invite not yet claimed → show the gate.
+  // Signed in but invite not yet claimed → show the gate.
   // Hooks below run unconditionally so React state stays consistent across renders.
   const showInviteGate = !!authUser && !guest
 

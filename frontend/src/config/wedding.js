@@ -14,7 +14,7 @@ export const WEDDING = {
   /** Deployed app URL for invite links. Prefer setting `VITE_APP_URL` in `.env` (e.g. https://your-site.vercel.app). */
   appUrl: import.meta.env.VITE_APP_URL || '',
 
-  tagline:      'Vows & Vermillion',
+  tagline:      'Saat (7) - Vachan',
   subTagline:   'The Digital Heirloom Experience',
   heroSubtitle: 'Welcome to our wedding space, a home for our story, moments and everything in between.',
 

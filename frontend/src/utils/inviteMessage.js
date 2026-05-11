@@ -24,7 +24,7 @@ export function buildInviteMessage({ guestName, inviteCode }) {
     '',
     `Open the app: ${loginUrl}`,
     '',
-    'Sign in with Google, then enter your invite code when prompted.',
+    'Sign in with Google or request an email link on that page, then enter your invite code when prompted.',
     '',
     `— ${couple}`,
   ].join('\n')

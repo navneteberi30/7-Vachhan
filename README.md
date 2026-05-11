@@ -60,6 +60,20 @@ supabase db push
 Use the `user-stitch` MCP tools (`list_projects`, `list_screens`, `get_screen`) from within
 Cursor to fetch the latest screen designs into `stitch/exports/`.
 
+### 6. Supabase Auth: Google + email magic link
+
+The login page supports **Continue with Google** and **Email me a sign-in link** (passwordless OTP).
+Configure your Supabase project once:
+
+1. **Authentication → Providers → Email**: enable the Email provider so magic-link emails can be sent.
+2. **Authentication → URL configuration**: set **Site URL** to your deployed app origin (and use `http://localhost:5173` for local dev). Under **Redirect URLs**, allow every URL the app may use after clicking the link, for example:
+   - `http://localhost:5173/**`
+   - `https://<your-production-domain>/**`  
+   The app sends magic links that redirect to `{origin}/login`, which must match the allowlist.
+3. **Email templates** (optional): customize the magic-link email subject/body in **Authentication → Email Templates**.
+
+Without step 2, users see errors or a blank session after clicking the link from email.
+
 ## Database Tables
 
 | Table | Purpose |
