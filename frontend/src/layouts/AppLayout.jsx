@@ -76,7 +76,7 @@ function ProfileSheet({ guest, authUser, onClose, onLogout }) {
 }
 
 export default function AppLayout() {
-  const { guest, authUser, logout } = useAuth()
+  const { guest, authUser, logout, isAdmin } = useAuth()
   const navigate = useNavigate()
   const [showProfile, setShowProfile] = useState(false)
 
@@ -101,6 +101,21 @@ export default function AppLayout() {
           <h1 className="text-2xl font-headline italic tracking-wide text-primary">
             {WEDDING.coupleShort} Wedding
           </h1>
+          <div className="flex items-center gap-2">
+          {isAdmin && (
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                `w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                  isActive ? 'bg-primary text-on-primary' : 'bg-surface-container-high text-primary hover:bg-primary/10'
+                }`
+              }
+              title="Admin"
+              aria-label="Admin dashboard"
+            >
+              <span className="material-symbols-outlined text-xl">settings</span>
+            </NavLink>
+          )}
           <button
             onClick={() => setShowProfile(true)}
             className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden text-on-secondary-container font-bold text-sm hover:opacity-80 transition-opacity"
@@ -111,6 +126,7 @@ export default function AppLayout() {
               : initials
             }
           </button>
+          </div>
         </div>
       </header>
 

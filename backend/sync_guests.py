@@ -13,10 +13,16 @@ Google Sheet columns (row 1 = header):
   Name | Phone | Email | Table | Meal | Notes | Invite Code  ← auto-filled
 
 Usage:
-  uv run sync_guests.py              # sync sheet → Supabase
+  uv run sync_guests.py                        # sync sheet → Supabase
+  uv run sync_guests.py --write-message-column # also fill column H with invite SMS/text
+  uv run sync_guests.py --export-messages ./invites.csv
   uv run sync_guests.py --export     # print current Supabase guest list
   uv run sync_guests.py --reset CODE # clear the claimed_at for a guest code
-                                       (use when a guest switches phones)
+
+Env:
+  APP_PUBLIC_URL   Production site URL for invite links (e.g. https://wedding.vercel.app)
+  GOOGLE_SHEET_ID  Spreadsheet ID from the URL
+  GOOGLE_SHEET_NAME Worksheet tab name (default: Guests)
 """
 
 import os
@@ -36,6 +42,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 _CA_BUNDLE = os.path.expanduser('~/Documents/Munson-(FDE)/complete_ca_bundle.pem')
 
+import csv
 import random
 import string
 import argparse
@@ -53,6 +60,8 @@ SUPABASE_URL = os.getenv('VITE_SUPABASE_URL') or os.getenv('SUPABASE_URL')
 SUPABASE_KEY = os.getenv('SUPABASE_SERVICE_KEY')    # service role key — has write access
 SHEET_ID     = os.getenv('GOOGLE_SHEET_ID')         # from the sheet URL
 SHEET_NAME   = os.getenv('GOOGLE_SHEET_NAME', 'Guests')
+APP_PUBLIC_URL = (os.getenv('APP_PUBLIC_URL') or os.getenv('VITE_APP_URL') or '').strip().rstrip('/')
+COUPLE_LABEL = os.getenv('INVITE_COUPLE_LABEL', 'Nav & Sanju')
 
 # Column indices (0-based) — adjust if your sheet differs
 COL_NAME   = 0
@@ -62,8 +71,32 @@ COL_TABLE  = 3
 COL_MEAL   = 4
 COL_NOTES  = 5
 COL_CODE   = 6   # auto-filled by this script
+COL_INVITE_MESSAGE = 7   # column H — optional, filled with --write-message-column
 
 CODE_PREFIX = 'NS'   # Nav-Sanju → codes look like NS-A7X2
+
+
+def build_invite_message(name: str, code: str) -> str:
+    """Pre-written text for WhatsApp/SMS — matches frontend utils/inviteMessage.js tone."""
+    base = APP_PUBLIC_URL or 'https://YOUR-APP-URL.com'
+    login_url = f'{base}/login'
+    return (
+        f'Hi {name}!\n\n'
+        f"You're invited to {COUPLE_LABEL}'s wedding — RSVP, events, gallery, and more on our site.\n\n"
+        f'Your invite code: {code}\n\n'
+        f'Open the app: {login_url}\n\n'
+        'Sign in with Google, then enter your invite code when prompted.\n\n'
+        f'— {COUPLE_LABEL}'
+    )
+
+
+def ensure_invite_message_header(ws) -> None:
+    """Ensure row 1 column H is labeled Invite Message."""
+    row1 = ws.row_values(1)
+    while len(row1) < COL_INVITE_MESSAGE + 1:
+        row1.append('')
+    if row1[COL_INVITE_MESSAGE].strip() != 'Invite Message':
+        ws.update_cell(1, COL_INVITE_MESSAGE + 1, 'Invite Message')
 
 
 def make_code(existing_codes: set) -> str:
@@ -133,7 +166,11 @@ def make_supabase():
     return create_client(SUPABASE_URL, SUPABASE_KEY, options=ClientOptions(httpx_client=http_client))
 
 
-def sync(dry_run=False):
+def sync(
+    dry_run=False,
+    export_messages_path: str | None = None,
+    write_message_column: bool = False,
+):
     sb = make_supabase()
     ws = get_sheet()
 
@@ -150,6 +187,7 @@ def sync(dry_run=False):
 
     upserted, skipped, code_assigned = 0, 0, 0
     sheet_updates = []  # (row_index, col_index, value) for writing codes back
+    synced_rows = []    # {name, code, row_idx} for messages
 
     for row_idx, row in enumerate(data_rows, start=2):   # row 2 in sheet (1-indexed)
         # Pad short rows
@@ -194,6 +232,7 @@ def sync(dry_run=False):
             ).execute()
 
         upserted += 1
+        synced_rows.append({'name': name, 'code': code, 'row_idx': row_idx})
 
     # Write generated codes back to the sheet
     if sheet_updates and not dry_run:
@@ -201,10 +240,43 @@ def sync(dry_run=False):
             ws.update_cell(row_i, col_i, val)
         print(f'✅  Wrote {len(sheet_updates)} new invite code(s) back to sheet')
 
+    # Pre-filled invite messages (same text as Admin → Copy invite)
+    messages_out = []
+    for item in synced_rows:
+        msg = build_invite_message(item['name'], item['code'])
+        messages_out.append({
+            'name': item['name'],
+            'invite_code': item['code'],
+            'message': msg,
+            'row_idx': item['row_idx'],
+        })
+
+    if export_messages_path and messages_out:
+        path = os.path.expanduser(export_messages_path)
+        if dry_run:
+            print(f'[DRY] Would export {len(messages_out)} invite message(s) → {path}')
+        else:
+            with open(path, 'w', newline='', encoding='utf-8') as f:
+                w = csv.DictWriter(f, fieldnames=['name', 'invite_code', 'message'])
+                w.writeheader()
+                for m in messages_out:
+                    w.writerow({'name': m['name'], 'invite_code': m['invite_code'], 'message': m['message']})
+            print(f'✅  Exported {len(messages_out)} invite message(s) → {path}')
+
+    if write_message_column and messages_out and not dry_run:
+        if not APP_PUBLIC_URL:
+            print('⚠️  APP_PUBLIC_URL (or VITE_APP_URL) not set — messages use placeholder URL. Set it in .env.')
+        ensure_invite_message_header(ws)
+        for m in messages_out:
+            ws.update_cell(m['row_idx'], COL_INVITE_MESSAGE + 1, m['message'])
+        print(f'✅  Wrote invite message column (H) for {len(messages_out)} row(s)')
+
     print(f'\n✅  Sync complete')
     print(f'   Upserted:       {upserted} guests')
     print(f'   Codes assigned: {code_assigned}')
     print(f'   Skipped:        {skipped} empty rows')
+    if APP_PUBLIC_URL:
+        print(f'   App URL:        {APP_PUBLIC_URL}')
 
 
 def export_guests():
@@ -238,6 +310,16 @@ if __name__ == '__main__':
     parser.add_argument('--dry-run', action='store_true', help='Preview changes without writing')
     parser.add_argument('--export', action='store_true', help='Print current guest list from Supabase')
     parser.add_argument('--reset', metavar='CODE', help='Reset a guest\'s device claim so they can log in again')
+    parser.add_argument(
+        '--export-messages',
+        metavar='FILE.csv',
+        help='After sync, write name / invite_code / message rows to this CSV',
+    )
+    parser.add_argument(
+        '--write-message-column',
+        action='store_true',
+        help='After sync, fill sheet column H (Invite Message) with the pre-written text',
+    )
     args = parser.parse_args()
 
     if args.export:
@@ -245,4 +327,8 @@ if __name__ == '__main__':
     elif args.reset:
         reset_guest(args.reset)
     else:
-        sync(dry_run=args.dry_run)
+        sync(
+            dry_run=args.dry_run,
+            export_messages_path=args.export_messages,
+            write_message_column=args.write_message_column,
+        )

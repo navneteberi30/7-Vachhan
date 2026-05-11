@@ -77,3 +77,10 @@ Cursor to fetch the latest screen designs into `stitch/exports/`.
 | `scripts/export_guests.py` | Download current guest list as CSV/Excel |
 | `scripts/assign_rooms.py` | Run room assignment logic and push results to Supabase |
 | `notifications/push_notifications.py` | Send push notifications to guests |
+
+```
+cd backend
+uv run sync_guests.py --export-messages ../invite-messages.csv
+uv run sync_guests.py --write-message-column
+uv run sync_guests.py --export-messages ./out.csv --write-message-column
+```

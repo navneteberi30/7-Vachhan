@@ -1,6 +1,7 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useMemo } from 'react'
 import { supabase } from '../services/supabase'
 import { getGuestByUserId, claimInviteCode, signInWithGoogle, signOut } from '../services/auth'
+import { WEDDING } from '../config/wedding'
 
 const AuthContext = createContext(null)
 
@@ -79,10 +80,17 @@ export function AuthProvider({ children }) {
     await signOut()
   }
 
+  const isAdmin = useMemo(() => {
+    if (!authUser) return false
+    if (authUser.id === WEDDING.adminUserId) return true
+    return guest?.is_admin === true
+  }, [authUser, guest])
+
   return (
     <AuthContext.Provider value={{
       authUser,           // Google/Supabase auth identity
       guest,              // Linked guest record (null if code not yet linked)
+      isAdmin,            // true for organizers — `/admin` dashboard
       loading,
       signInWithGoogle,   // () => void — triggers Google OAuth redirect
       linkCode,           // (code) => Promise — links invite code to Google account

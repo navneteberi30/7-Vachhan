@@ -7,6 +7,13 @@ export const WEDDING = {
   groomName:    'Nav',
   brideName:    'Sanjna',
   coupleShort:  'Nav & Sanju',          // used in top nav
+
+  /** Supabase Auth user UUID — grants access to `/admin` (must match your Google-linked account). */
+  adminUserId:  '1d53dc3d-20bc-4482-9ad9-cfda9508e870',
+
+  /** Deployed app URL for invite links. Prefer setting `VITE_APP_URL` in `.env` (e.g. https://your-site.vercel.app). */
+  appUrl: import.meta.env.VITE_APP_URL || '',
+
   tagline:      'Vows & Vermillion',
   subTagline:   'The Digital Heirloom Experience',
   heroSubtitle: 'Welcome to our wedding space, a home for our story, moments and everything in between.',

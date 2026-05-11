@@ -22,6 +22,12 @@ function validateImageFile(file) {
   }
 }
 
+function isStorageObjectMissing(error) {
+  if (!error) return false
+  const msg = (error.message || '').toLowerCase()
+  return msg.includes('not found') || msg.includes('does not exist') || error.statusCode === '404'
+}
+
 async function attachSignedUrls(photos) {
   return Promise.all((photos ?? []).map(async photo => {
     if (!photo.storage_path) return photo
@@ -30,8 +36,18 @@ async function attachSignedUrls(photos) {
       .from(BUCKET)
       .createSignedUrl(photo.storage_path, SIGNED_URL_TTL_SECONDS)
 
-    if (error) throw error
-    return { ...photo, public_url: data.signedUrl }
+    if (error) {
+      const missing = isStorageObjectMissing(error)
+      if (!missing) {
+        console.warn('Gallery signed URL failed:', photo.storage_path, error.message)
+      }
+      return {
+        ...photo,
+        public_url: null,
+        missing_in_storage: missing,
+      }
+    }
+    return { ...photo, public_url: data.signedUrl, missing_in_storage: false }
   }))
 }
 
@@ -137,6 +153,25 @@ export async function approvePhoto(photoId) {
   const { error } = await supabase
     .from('gallery_photos')
     .update({ moderation_status: 'approved' })
+    .eq('id', photoId)
+  if (error) throw error
+}
+
+/** Admin moderation — pending / approved / rejected */
+export async function fetchPhotosByModerationStatus(status) {
+  const { data, error } = await supabase
+    .from('gallery_photos')
+    .select('*, guests(name)')
+    .eq('moderation_status', status)
+    .order('uploaded_at', { ascending: false })
+  if (error) throw error
+  return attachSignedUrls(data ?? [])
+}
+
+export async function rejectPhoto(photoId) {
+  const { error } = await supabase
+    .from('gallery_photos')
+    .update({ moderation_status: 'rejected' })
     .eq('id', photoId)
   if (error) throw error
 }

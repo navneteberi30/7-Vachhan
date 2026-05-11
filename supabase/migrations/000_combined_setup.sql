@@ -198,7 +198,6 @@ on conflict (slug) do nothing;
 -- ─── Seed: Sample Guests (edit with real guest names + codes) ─────────────────
 insert into guests (name, invite_code, mobile)
 values
-  ('Demo Guest',   'DEMO-1234', null),
   ('Arjun Family', 'ARJUN-001', null),
   ('Saumya Family','SAUMYA-01', null)
 on conflict (invite_code) do nothing;
