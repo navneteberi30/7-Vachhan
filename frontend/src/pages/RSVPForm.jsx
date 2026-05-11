@@ -41,7 +41,7 @@ function formatEventDate(dateStr) {
 
 // ── Confirmed summary view ────────────────────────────────────────────────────
 function RSVPSummary({ existingRSVPs, events, onEdit }) {
-  const eventMap = Object.fromEntries(events.map(e => [e.id, e]))
+  const rsvpByEventId = Object.fromEntries(existingRSVPs.map(r => [r.event_id, r]))
 
   return (
     <div className="bg-background text-on-surface">
@@ -59,9 +59,9 @@ function RSVPSummary({ existingRSVPs, events, onEdit }) {
       </section>
 
       <div className="max-w-2xl mx-auto px-6 pb-12 space-y-4">
-        {existingRSVPs.map(rsvp => {
-          const event = eventMap[rsvp.event_id]
-          if (!event) return null
+        {events.map(event => {
+          const rsvp = rsvpByEventId[event.id]
+          if (!rsvp) return null
           return (
             <div key={rsvp.id} className="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex items-center justify-between gap-4">
               <div className="flex items-center gap-4">

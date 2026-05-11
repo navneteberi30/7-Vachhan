@@ -45,7 +45,7 @@ export default function Events() {
                   alt={event.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className={`absolute ${isReverse ? 'top-4 right-4' : 'top-4 left-4'} bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full border border-tertiary/20`}>
+                <div className="absolute top-4 left-4 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full border border-tertiary/20">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-tertiary">
                     {formatDate(event.event_date)}
                   </span>
