@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { useEvents } from '../hooks/useEvents'
 import useCountdown from '../hooks/useCountdown'
 import { WEDDING } from '../config/wedding'
+import InstallAppHint from '../components/InstallAppHint'
 
 function pad(n) { return String(n).padStart(2, '0') }
 
@@ -93,6 +94,7 @@ export default function Home() {
             </Fragment>
           ))}
         </div>
+        <InstallAppHint />
       </section>
 
       {/* Message */}

@@ -6,7 +6,9 @@ export const WEDDING = {
   // ── Couple ────────────────────────────────────────────────────
   groomName:    'Nav',
   brideName:    'Sanjna',
-  coupleShort:  'Nav & Sanju',          // used in top nav
+  coupleShort:  'Nav & Sanju',          // invite copy / casual references
+  /** Top app bar title (center of header). */
+  headerTitle:  'Saat-Vachan',
 
   /** Supabase Auth user UUID — grants access to `/admin` (must match your Google-linked account). */
   adminUserId:  '1d53dc3d-20bc-4482-9ad9-cfda9508e870',
@@ -32,8 +34,9 @@ export const WEDDING = {
 
   // ── Couple quote shown on Home page ──────────────────────────
   coupleQuote:
-    '"Some love stories are written in the stars - ours just needed a little time to find its way. ' +
-    'So come, be part of our story, our madness, and all the love we are about to celebrate."',
+    "They say 'Pyaar Dosti Hai,' and our journey from being best friends to life partners has been our favorite story to tell. " +
+    'Now, as we prepare to take our Pheras and begin our forever, we want the people who have been our biggest support to be right there with us. ' +
+    'So come, be part of our story, our madness, and all the love we are about to share.',
 
   // ── Hero carousel on Home page ────────────────────────────────
   //    Add as many photo URLs as you want — they crossfade every 4s.

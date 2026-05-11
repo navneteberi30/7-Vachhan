@@ -99,7 +99,7 @@ export default function AppLayout() {
         <div className="flex justify-between items-center px-6 h-16 w-full max-w-7xl mx-auto">
           <span className="material-symbols-outlined text-primary cursor-pointer">menu</span>
           <h1 className="text-2xl font-headline italic tracking-wide text-primary">
-            {WEDDING.coupleShort} Wedding
+            {WEDDING.headerTitle}
           </h1>
           <div className="flex items-center gap-2">
           {isAdmin && (

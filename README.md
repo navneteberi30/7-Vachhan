@@ -74,6 +74,13 @@ Configure your Supabase project once:
 
 Without step 2, users see errors or a blank session after clicking the link from email.
 
+### 7. Add to home screen (PWA)
+
+The app ships a [web app manifest](frontend/public/manifest.webmanifest) and a minimal [service worker](frontend/public/sw.js) so guests can **install** the site on Android (Chrome) or **Add to Home Screen** on iPhone (Safari). The service worker only handles installability; it does not change how the live app loads.
+
+- **Production** must be served over **HTTPS** (or `localhost` when developing). Service workers are not registered during `npm run dev`; use `npm run build` + `npm run preview` to test install prompts locally.
+- Replace **icons** in `frontend/public/` (`pwa-192.png`, `pwa-512.png`, `apple-touch-icon.png`) if you want a custom app icon—sizes are generated from the existing story image for now.
+
 ## Database Tables
 
 | Table | Purpose |
