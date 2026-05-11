@@ -1,8 +1,25 @@
 import { useAuth } from '../contexts/AuthContext'
 import { WEDDING } from '../config/wedding'
+import { useEvents } from '../hooks/useEvents'
+
+function formatEventWhen(event) {
+  const d = new Date(event.event_date + 'T00:00:00')
+  const month = d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()
+  const day = d.getDate()
+  // Extract first time from event_time (e.g. "11:00 AM onwards" → "11:00")
+  const timeMatch = event.event_time.match(/\d{1,2}:\d{2}/)
+  const time = timeMatch ? timeMatch[0] : ''
+  return `${month} ${day}${time ? ', ' + time : ''}`
+}
+
+function shortVenue(event) {
+  // Use first segment of venue_address (city part)
+  return (event.venue_address || '').split(',')[0].trim() || event.venue_name
+}
 
 export default function StayInfo() {
   const { guest } = useAuth()
+  const { events } = useEvents()
   // Try to get room assignment from Supabase; fall back to a friendly message
   const roomNumber = null // Will be populated from room_assignments table
 
@@ -13,7 +30,7 @@ export default function StayInfo() {
       {/* Hero header */}
       <section className="pt-12 px-6 text-center space-y-3 max-w-2xl mx-auto">
         <span className="font-label text-tertiary uppercase tracking-[0.2em] text-xs font-semibold">Your Stay Experience</span>
-        <h2 className="font-headline text-4xl md:text-5xl text-on-surface leading-tight">Welcome Home</h2>
+        <h2 className="font-headline text-4xl md:text-5xl text-on-surface leading-tight">Welcome Aboard</h2>
         <div className="w-16 h-[2px] bg-tertiary/30 mx-auto" />
         <p className="font-body text-on-surface-variant max-w-md mx-auto">
           We've arranged a luxurious stay to ensure your comfort throughout the wedding festivities.
@@ -101,18 +118,21 @@ export default function StayInfo() {
         <section className="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 space-y-6">
           <h3 className="font-headline text-xl text-center">Upcoming at Venue</h3>
           <div className="space-y-8">
-            {WEDDING.stayItinerary.map((item, i) => (
-              <div key={i} className={`flex gap-6 items-start ${!item.active ? 'opacity-50' : ''}`}>
-                <div className="pt-1 flex-shrink-0">
-                  <div className={`w-3 h-3 rounded-full ${item.active ? 'bg-primary ring-4 ring-primary-container/30' : 'bg-outline-variant'}`} />
+            {events.map((event, i) => {
+              const isFirst = i === 0
+              return (
+                <div key={event.id ?? event.slug} className={`flex gap-6 items-start ${!isFirst ? 'opacity-50' : ''}`}>
+                  <div className="pt-1 flex-shrink-0">
+                    <div className={`w-3 h-3 rounded-full ${isFirst ? 'bg-primary ring-4 ring-primary-container/30' : 'bg-outline-variant'}`} />
+                  </div>
+                  <div className="space-y-0.5">
+                    <p className="font-label text-xs text-tertiary font-bold uppercase tracking-widest">{formatEventWhen(event)}</p>
+                    <p className="font-headline text-lg">{event.name}</p>
+                    <p className="text-sm text-on-surface-variant">{shortVenue(event)}</p>
+                  </div>
                 </div>
-                <div className="space-y-0.5">
-                  <p className="font-label text-xs text-tertiary font-bold uppercase tracking-widest">{item.when}</p>
-                  <p className="font-headline text-lg">{item.title}</p>
-                  <p className="text-sm text-on-surface-variant">{item.location}</p>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </section>
       </div>

@@ -47,19 +47,11 @@ export const WEDDING = {
   hotel: {
     name:      'Roche Harbor',
     address:   'Ramgarh Rd, near sector 28, Mubarakpur, Dera Bassi, Bir Pir Machhalia, Punjab 140201, India',
-    image:     'https://lh3.googleusercontent.com/aida-public/AB6AXuBTUPQrPGi7kfjmXpfKfCrauU0gwCbr1qcrU4gfwIhv_WIGDnl6km90RRBmXzuZeFBMBTjcH8lNNiiIUxJv6TBfQpy1fJAztos8Lt8CaD7NKjug87PuHvhC7o9Y3HdQ_ujYrKSUznohVHtFieyXetvP5zFsBUoc_8kaBDbcxY16mJKmfOGBIOx4RY-ZUQHhinVpzTNXY4kYzdbYSEz1VIAlp5_DO4LLnJXMpLFBOI1HlfiDU-OVZ82STpPUVRuo3K7JPc3mM7Ckvtw',
+    image:     '/images/hotel-roche-harbor.png',
     checkIn:   '14:00',
     checkOut:  '12:00',
     mapsQuery: 'Roche+Harbor+Ramgarh+Rd+Dera+Bassi+Punjab+India',
   },
-
-  // ── Upcoming events shown on Stay Info page ───────────────────
-  stayItinerary: [
-    { when: 'Feb 17, 12:00', title: 'Mehndi Ceremony', location: 'Kernal', active: true  },
-    { when: 'Feb 18, 20:00', title: 'Cocktail Night', location: 'Roche Harbor', active: false },
-    { when: 'Feb 19, 12:00', title: 'Haldi Ceremony', location: 'Roche Harbor', active: false },
-    { when: 'Feb 19, 20:00', title: 'The Wedding Day', location: 'Roche Harbor', active: false },
-  ],
 
   // ── Event images ──────────────────────────────────────────────
   //    Keys must match the slug in your Supabase events table
@@ -76,7 +68,7 @@ export const WEDDING = {
   events: [
     {
       slug:         'mehndi',
-      name:         'Green Chapter',
+      name:         'Shame-E-Mehndi',
       ceremony_label: 'Mehndi',
       event_date:   '2027-02-17',
       event_time:   '11:00 AM onwards',
@@ -84,13 +76,13 @@ export const WEDDING = {
       venue_name:   'TBD',
       venue_address:'Karnal, Haryana',
       dress_code:   'Green Festive / Ethnic',
-      description:  '    Mehndi ka glow, emotions on show, let the wedding madness flow-flow-flow',
+      description:  'Haathon pe mehndi ka noor hai, aaj har dil thoda majboor hai (to dance)',
       icon:         'draw',
       
     },
     {
       slug:         'cocktail',
-      name:         'Cocktail Night',
+      name:         'Taal & Tequila',
       ceremony_label: 'Sangeet',
       event_date:   '2027-02-18',
       event_time:   '7:00 PM onwards',
@@ -102,7 +94,7 @@ export const WEDDING = {
       icon:         'wine_bar',
     },
     { slug:         'haldi',
-      name:         'Turmeric Tales',
+      name:         'Rang De-Haldi',
       ceremony_label: 'Haldi',
       event_date:   '2027-02-19',           // YYYY-MM-DD
       event_time:   'Starts at 11:00 AM',
@@ -110,12 +102,12 @@ export const WEDDING = {
       venue_name:   'Sunlit Courtyard',
       venue_address:'Roche Harbour, Chandigarh, Punjab',
       dress_code:   'Yellow Festive / Ethnic',
-      description:  'Yellow outfits ready?\nKyuki iss Haldi mein sirf rang nahi, poora vibe udega',
+      description:  'Naach-gaana aur haldi ki holi, Join us with your family & toli!',
       icon:         'brightness_7',
     },
     {
       slug:         'wedding',
-      name:         'The D-Day',
+      name:         '7 Vachan',
       ceremony_label: 'Pheras',
       event_date:   '2027-02-19',
       event_time:   '7:00 PM onwards',

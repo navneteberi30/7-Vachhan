@@ -98,7 +98,7 @@ export default function Home() {
       {/* Message */}
       <section className="px-6 pt-16 pb-10 max-w-3xl mx-auto text-center">
         <span className="material-symbols-outlined text-tertiary text-4xl mb-6">auto_awesome</span>
-        <h3 className="text-3xl font-headline text-on-surface mb-6 italic">A Message from the Couple</h3>
+        <h3 className="text-3xl font-headline text-on-surface mb-6 italic">A message from Us</h3>
         <p className="text-on-surface-variant text-lg leading-relaxed font-body italic">
           {WEDDING.coupleQuote}
         </p>
