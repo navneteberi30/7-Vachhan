@@ -59,7 +59,9 @@ export const WEDDING = {
     address:   'Ramgarh Rd, near sector 28, Mubarakpur, Dera Bassi, Bir Pir Machhalia, Punjab 140201, India',
     image:     '/images/hotel-roche-harbor.png',
     checkIn:   '14:00',
+    checkInDate: 'Feb 18',
     checkOut:  '12:00',
+    checkOutDate: 'Feb 20',
     mapsQuery: 'Roche+Harbor+Ramgarh+Rd+Dera+Bassi+Punjab+India',
   },
 
@@ -78,7 +80,7 @@ export const WEDDING = {
   events: [
     {
       slug:         'mehndi',
-      name:         'Shame-E-Mehndi',
+      name:         'Sham-E-Mehndi',
       ceremony_label: 'Mehndi',
       event_date:   '2027-02-17',
       event_time:   '11:00 AM onwards',
@@ -100,7 +102,7 @@ export const WEDDING = {
       venue_name:   'Sangeet Suite',
       venue_address:'Roche Harbour, Chandigarh, Punjab',
       dress_code:   'Tuxedo / Glamorous',
-      description:  'Dhols hit hard, vibes go far — suddenly everyone’s a superstar 💃',
+      description:  'Dhols hit hard, vibes go far suddenly everyone’s a superstar 💃',
       icon:         'wine_bar',
     },
     { slug:         'haldi',
@@ -112,12 +114,12 @@ export const WEDDING = {
       venue_name:   'Sunlit Courtyard',
       venue_address:'Roche Harbour, Chandigarh, Punjab',
       dress_code:   'Yellow Festive / Ethnic',
-      description:  'Naach-gaana aur haldi ki holi, join us with your family & toli! 🌼',
+      description:  'Naach-gaana aur haldi ki holi, join us with your family & toli 🌼',
       icon:         'brightness_7',
     },
     {
       slug:         'wedding',
-      name:         'Saat(7) - Vachan',
+      name:         'Saat-Vachan',
       ceremony_label: 'Pheras',
       event_date:   '2027-02-19',
       event_time:   '7:00 PM onwards',

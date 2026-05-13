@@ -6,9 +6,9 @@ function formatEventWhen(event) {
   const d = new Date(event.event_date + 'T00:00:00')
   const month = d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()
   const day = d.getDate()
-  // Extract first time from event_time (e.g. "11:00 AM onwards" → "11:00")
-  const timeMatch = event.event_time.match(/\d{1,2}:\d{2}/)
-  const time = timeMatch ? timeMatch[0] : ''
+  // Extract time + AM/PM from event_time (e.g. "11:00 AM onwards" → "11:00 AM")
+  const timeMatch = event.event_time.match(/(\d{1,2}:\d{2})\s*(AM|PM)?/i)
+  const time = timeMatch ? (timeMatch[1] + (timeMatch[2] ? ' ' + timeMatch[2].toUpperCase() : '')) : ''
   return `${month} ${day}${time ? ', ' + time : ''}`
 }
 
@@ -100,14 +100,16 @@ export default function StayInfo() {
                 <span className="material-symbols-outlined">schedule</span>
                 <span className="font-label text-xs uppercase tracking-widest font-bold">Timings</span>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-0.5">
                   <p className="text-xs text-on-surface-variant uppercase font-bold tracking-wide">Check-In</p>
                   <p className="font-headline text-xl">{WEDDING.hotel.checkIn}</p>
+                  <p className="text-xs text-on-surface-variant">{WEDDING.hotel.checkInDate}</p>
                 </div>
                 <div className="space-y-0.5">
                   <p className="text-xs text-on-surface-variant uppercase font-bold tracking-wide">Check-Out</p>
                   <p className="font-headline text-xl">{WEDDING.hotel.checkOut}</p>
+                  <p className="text-xs text-on-surface-variant">{WEDDING.hotel.checkOutDate}</p>
                 </div>
               </div>
             </div>
