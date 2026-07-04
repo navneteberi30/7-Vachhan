@@ -16,16 +16,23 @@ export function buildInviteMessage({ guestName, inviteCode }) {
   const couple = WEDDING.coupleShort
   const loginUrl = `${base}/login`
   return [
-    `Hi ${guestName}!`,
+    `Dear ${guestName}`,
     '',
-    `You're invited to ${couple}'s wedding — RSVP, events, gallery, and more on our site.`,
+    'With joyful hearts, we are excited to share that we are getting married! As we begin this beautiful journey together, it would mean the world to celebrate these special moments with you and create memories to cherish forever✨ ✨',
     '',
-    `Your invite code: ${inviteCode}`,
+    'To make celebrating with us easy and memorable, we\'ve created our Wedding App "Saat Vachan", bringing together all the details- from event schedules and venue information to guest responses, photos, and much more.',
     '',
-    `Open the app: ${loginUrl}`,
+    `📱 Open the app: ${loginUrl}`,
     '',
-    'Sign in with Google or request an email link on that page, then enter your invite code when prompted.',
+    `🔑 Invite Code: ${inviteCode}`,
     '',
-    `— ${couple}`,
+    'Simply sign in with Google or request an email link, and enter the invite code when prompted.',
+    '',
+    'We can\'t wait to celebrate with all our loved ones!  Your presence will make these moments even more special❤️',
+    '',
+    'With love,',
+    `${couple} 💍✨`,
   ].join('\n')
 }
+
+

@@ -28,6 +28,9 @@ export default function EventDetail() {
     </div>
   )
 
+  const configEvent = WEDDING.events.find(e => e.slug === slug)
+  const venueMapsUrl = event.maps_url || configEvent?.maps_url || mapsUrl(event.venue_name, event.venue_address)
+
   return (
     <div className="bg-background text-on-surface">
       {/* Hero image */}
@@ -69,7 +72,7 @@ export default function EventDetail() {
             <p className="font-body text-on-surface-variant leading-relaxed">{event.venue_address}</p>
           </div>
           <a
-            href={mapsUrl(event.venue_name, event.venue_address)}
+            href={venueMapsUrl}
             target="_blank"
             rel="noreferrer"
             className="flex items-center justify-center gap-2 w-full py-4 cta-gradient text-on-primary font-semibold hover:opacity-90 transition-opacity"
